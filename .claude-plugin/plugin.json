@@ -1,0 +1,56 @@
+{
+  "name": "joseph-dev-workflow",
+  "version": "1.0.0",
+  "description": "Universal development workflow plugin with AI-powered skills, agents, and automation for Claude Code",
+  "authors": [
+    {
+      "name": "Joseph Cannon",
+      "email": "joseph.cannon@outlook.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joseph-cannon/joseph-dev-workflow"
+  },
+  "keywords": [
+    "claude-code",
+    "workflow",
+    "development",
+    "agents",
+    "skills",
+    "hooks",
+    "github",
+    "git-worktrees",
+    "code-review",
+    "debugging"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/joseph-cannon/joseph-dev-workflow#readme",
+  "bugs": {
+    "url": "https://github.com/joseph-cannon/joseph-dev-workflow/issues"
+  },
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "features": {
+    "skills": true,
+    "commands": true,
+    "agents": true,
+    "hooks": true,
+    "templates": true
+  },
+  "activation": {
+    "auto": true,
+    "triggers": [
+      "new project",
+      "brainstorm",
+      "debug",
+      "review",
+      "plan",
+      "feature",
+      "commit",
+      "pr",
+      "issue"
+    ]
+  }
+}
