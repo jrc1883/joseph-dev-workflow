@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Agent configuration for joseph-dev-workflow plugin",
+  "version": "1.0.0",
+
+  "tiers": {
+    "tier-1-always-active": {
+      "description": "Core agents always available for routing",
+      "agents": [
+        "code-reviewer",
+        "bug-whisperer",
+        "security-auditor",
+        "test-writer-fixer",
+        "api-designer",
+        "performance-optimizer",
+        "refactoring-expert",
+        "documentation-maintainer",
+        "query-optimizer",
+        "migration-specialist",
+        "accessibility-guardian"
+      ]
+    },
+    "tier-2-on-demand": {
+      "description": "Specialized agents activated on specific triggers",
+      "agents": [
+        "ai-engineer",
+        "deployment-validator",
+        "feature-prioritizer",
+        "rapid-prototyper",
+        "backup-coordinator",
+        "meta-agent",
+        "researcher-agent",
+        "user-story-writer",
+        "devops-automator-agent",
+        "bundle-analyzer",
+        "log-analyzer",
+        "metrics-collector",
+        "feedback-synthesizer",
+        "rollback-specialist",
+        "data-integrity-agent",
+        "dead-code-eliminator-agent"
+      ]
+    },
+    "feature-workflow": {
+      "description": "Agents for 7-phase feature development",
+      "agents": [
+        "code-explorer",
+        "code-architect",
+        "code-reviewer"
+      ]
+    }
+  },
+
+  "routing": {
+    "keywords": {
+      "bug": ["bug-whisperer", "test-writer-fixer"],
+      "error": ["bug-whisperer", "log-analyzer"],
+      "security": ["security-auditor"],
+      "performance": ["performance-optimizer", "bundle-analyzer"],
+      "test": ["test-writer-fixer"],
+      "api": ["api-designer"],
+      "refactor": ["refactoring-expert"],
+      "docs": ["documentation-maintainer"],
+      "database": ["query-optimizer"],
+      "migration": ["migration-specialist"],
+      "accessibility": ["accessibility-guardian"],
+      "deploy": ["deployment-validator", "devops-automator-agent"],
+      "backup": ["backup-coordinator"],
+      "ai": ["ai-engineer"],
+      "prototype": ["rapid-prototyper"],
+      "feature": ["feature-prioritizer", "user-story-writer"],
+      "metrics": ["metrics-collector"],
+      "logs": ["log-analyzer"],
+      "rollback": ["rollback-specialist"]
+    },
+
+    "filePatterns": {
+      "*.test.ts": ["test-writer-fixer"],
+      "*.spec.ts": ["test-writer-fixer"],
+      "*.tsx": ["code-reviewer", "accessibility-guardian"],
+      "*.sql": ["query-optimizer"],
+      "*.md": ["documentation-maintainer"],
+      "package.json": ["bundle-analyzer"],
+      "Dockerfile": ["devops-automator-agent"],
+      ".env*": ["security-auditor"]
+    },
+
+    "errorPatterns": {
+      "TypeError": ["bug-whisperer"],
+      "SyntaxError": ["code-reviewer"],
+      "SecurityError": ["security-auditor"],
+      "PerformanceWarning": ["performance-optimizer"],
+      "DeprecationWarning": ["migration-specialist"]
+    }
+  },
+
+  "workflows": {
+    "feature-dev": {
+      "phases": [
+        {"name": "Discovery", "agents": []},
+        {"name": "Exploration", "agents": ["code-explorer"]},
+        {"name": "Questions", "agents": []},
+        {"name": "Architecture", "agents": ["code-architect"]},
+        {"name": "Implementation", "agents": []},
+        {"name": "Review", "agents": ["code-reviewer"]},
+        {"name": "Summary", "agents": []}
+      ]
+    },
+    "debug": {
+      "agents": ["bug-whisperer", "log-analyzer"],
+      "sequential": true
+    },
+    "security-audit": {
+      "agents": ["security-auditor"],
+      "sequential": false
+    }
+  },
+
+  "confidence": {
+    "threshold": 80,
+    "levels": {
+      "0": "Not a real problem",
+      "25": "Possibly valid",
+      "50": "Moderately confident",
+      "75": "Highly confident",
+      "100": "Absolutely certain"
+    }
+  }
+}
