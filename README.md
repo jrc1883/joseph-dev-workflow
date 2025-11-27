@@ -4,12 +4,12 @@ Universal development workflow plugin for Claude Code with AI-powered skills, ag
 
 ## Features
 
-- **26 Specialized Agents** - Tier-1 always-active + Tier-2 on-demand agents
-- **23+ Skills** - From brainstorming to code review to git worktrees
-- **50+ Commands** - Full GitHub lifecycle, git operations, and more
-- **10+ Hooks** - Safety checks, agent orchestration, session management
-- **Output Styles** - Consistent templates for commits, PRs, reviews
-- **Project Generators** - MCP server and skill generators for project-specific tooling
+- **29 Specialized Agents** - 11 Tier-1 always-active + 15 Tier-2 on-demand + 3 feature-workflow
+- **21 Skills** - From brainstorming to code review to git worktrees
+- **17 Commands** - Full GitHub lifecycle, git operations, and more
+- **10 Hooks** - Safety checks, agent orchestration, session management
+- **8 Output Styles** - Consistent templates for commits, PRs, reviews
+- **MCP Server Template** - Generate project-specific dev servers with semantic search
 
 ## Installation
 
