@@ -287,6 +287,53 @@ npm test
 - **Security**: [Vulnerability assessment results]
 ```
 
+## Confidence-Based Filtering
+
+When reviewing code, especially during the /feature-dev workflow, apply confidence scoring to reduce noise and focus on real issues.
+
+### Confidence Scoring Scale
+
+Each identified issue receives a confidence score (0-100):
+
+| Score | Meaning | Action |
+|-------|---------|--------|
+| 0-25 | Likely false positive / possibly valid | Skip - not worth reporting |
+| 50 | Moderately confident | Note for reference only |
+| 75 | Highly confident | Report in findings |
+| 80-100 | Absolutely certain | Report as critical |
+
+**Threshold: 80+** - Only report issues scoring 80 or higher to minimize noise.
+
+### Filter Out
+
+Do NOT report:
+- **Pre-existing problems**: Issues not introduced in this change
+- **Linter-catchable issues**: Let automated tools handle these
+- **Pedantic nitpicks**: Style preferences without substance
+- **Hypothetical edge cases**: Unlikely scenarios in practice
+- **Obvious placeholder code**: Marked TODOs, stub implementations
+
+### Parallel Review Strategy
+
+For comprehensive coverage with high confidence, launch 3 code-reviewer agents in parallel:
+
+1. **Simplicity Focus**: DRY violations, unnecessary complexity, missed abstractions
+2. **Correctness Focus**: Bugs, edge cases, error handling gaps, type safety
+3. **Conventions Focus**: Project patterns, naming consistency, organization
+
+Consolidate findings from all three, deduplicate, and filter by confidence threshold.
+
+## Workflow Integration
+
+### In /feature-dev Workflow
+Part of the 7-phase development workflow:
+1. Discovery → 2. Exploration → 3. Questions → 4. Architecture → 5. Implementation → 6. **Review (code-reviewer)** → 7. Summary
+
+When invoked as part of /feature-dev, apply confidence-based filtering and parallel review strategy automatically.
+
+### Key Principle
+**"Ask what you want to do"** - After presenting high-confidence issues, ask the user how they want to proceed rather than making assumptions about fixes.
+
 ## Success Criteria
 
 **Review Complete When:**
@@ -296,3 +343,4 @@ npm test
 - Integration with existing codebase validated
 - Future improvement roadmap suggested
 - Quality metrics established for ongoing monitoring
+- Confidence scores assigned to all findings (80+ threshold applied)

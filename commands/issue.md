@@ -1,5 +1,5 @@
 ---
-name: issue
+name: pop:issue
 description: GitHub issue management - create, list, view, close, comment with AI-executable format
 ---
 

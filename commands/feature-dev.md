@@ -1,17 +1,17 @@
 ---
-name: feature-dev
+name: pop:feature-dev
 description: 7-phase feature development workflow - Discovery through Summary
 ---
 
-# /feature-dev - Complete Feature Development
+# /pop:feature-dev - Complete Feature Development
 
 End-to-end feature development using the 7-phase workflow.
 
 ## Usage
 
 ```
-/feature-dev [feature-name]
-/feature-dev "user authentication"
+/pop:feature-dev [feature-name]
+/pop:feature-dev "user authentication"
 ```
 
 ## The 7 Phases
@@ -185,7 +185,7 @@ The workflow uses these agents and skills:
 - **code-explorer** - Phase 2
 - **code-architect** - Phase 4
 - **code-reviewer** - Phase 6
-- **brainstorming** - Phase 1
-- **writing-plans** - Phase 5
-- **executing-plans** - Phase 5
-- **finishing-a-development-branch** - Phase 7
+- **pop:brainstorming** - Phase 1
+- **pop:writing-plans** - Phase 5
+- **pop:executing-plans** - Phase 5
+- **pop:finishing-a-development-branch** - Phase 7

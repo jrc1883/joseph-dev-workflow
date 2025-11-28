@@ -1,21 +1,21 @@
 ---
-name: brainstorm
+name: pop:brainstorm
 description: Interactive design refinement using Socratic method - turn rough ideas into detailed designs
 ---
 
-# /brainstorm - Interactive Design Session
+# /pop:brainstorm - Interactive Design Session
 
 Refine rough ideas into fully-formed designs through collaborative questioning.
 
 ## Usage
 
 ```
-/brainstorm [topic]
+/pop:brainstorm [topic]
 ```
 
 ## Process
 
-Invokes the **brainstorming** skill:
+Invokes the **pop:brainstorming** skill:
 
 1. **Understand context** - Review project state, docs, recent commits
 2. **Ask questions** - One at a time, prefer multiple choice
@@ -27,7 +27,7 @@ Invokes the **brainstorming** skill:
 ## Example Session
 
 ```
-/brainstorm user authentication
+/pop:brainstorm user authentication
 
 Claude: Let me check the current project state...
 
@@ -67,7 +67,7 @@ Creates design document:
 ```markdown
 # User Authentication Design
 
-> Created: 2025-01-15 via /brainstorm
+> Created: 2025-01-15 via /pop:brainstorm
 
 ## Summary
 OAuth authentication with Google and GitHub providers...
@@ -86,4 +86,4 @@ OAuth authentication with Google and GitHub providers...
 
 After design approval, offers:
 - Create worktree for implementation
-- Generate implementation plan via /write-plan
+- Generate implementation plan via /pop:write-plan

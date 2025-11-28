@@ -156,58 +156,54 @@ def on_agent_request(event_data: dict) -> dict:
         logger.warning(f"Unknown event type: {event_type}")
         return {}
 
-# CLI interface for testing
+# Main entry point - JSON stdin/stdout protocol
 if __name__ == "__main__":
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Test agent context integration')
-    parser.add_argument('command', choices=['status', 'list', 'load', 'suggest'], help='Command to run')
-    parser.add_argument('--agent', help='Agent name (for load command)')
-    parser.add_argument('--input', help='User input (for suggest command)')
-    parser.add_argument('--dir', help='Working directory')
-    
-    args = parser.parse_args()
-    
-    if args.command == 'status':
-        status = get_context_status(args.dir)
-        print("Context Status:")
-        print(json.dumps(status, indent=2))
-    
-    elif args.command == 'list':
-        agents = list_all_agents(args.dir)
-        print("Available Agents:")
-        for category, agent_list in agents.items():
-            print(f"\n{category.upper()} ({len(agent_list)} agents):")
-            for agent in agent_list:
-                name = agent.get('name', 'Unknown')
-                desc = agent.get('description', 'No description')[:50]
-                enhanced = '✓' if agent.get('_has_project_context') else ' '
-                print(f"  {enhanced} {name}: {desc}...")
-    
-    elif args.command == 'load':
-        if not args.agent:
-            print("Error: --agent required for load command")
-            sys.exit(1)
-        
-        agent = enhance_agent_loading(args.agent, args.dir)
-        if agent:
-            print(f"Successfully loaded agent: {args.agent}")
-            print(f"Enhanced: {'✓' if agent.get('_context_enhanced') else '✗'}")
-            print(f"Instructions length: {len(agent.get('instructions', ''))}")
-            print(f"Keywords: {len(agent.get('keywords', []))}")
-        else:
-            print(f"Failed to load agent: {args.agent}")
-    
-    elif args.command == 'suggest':
-        if not args.input:
-            print("Error: --input required for suggest command")
-            sys.exit(1)
-        
-        suggestions = get_agent_suggestions(args.input, args.dir)
-        print(f"Agent suggestions for: '{args.input}'")
-        for i, sugg in enumerate(suggestions, 1):
-            print(f"\n{i}. {sugg['name']} (score: {sugg['score']:.2f})")
-            print(f"   {sugg['description'][:60]}...")
-            print(f"   Reasons: {', '.join(sugg['reasons'])}")
-    
-    print(f"\nSystem Status: {'✓ Available' if CONTEXT_SYSTEM_AVAILABLE else '✗ Unavailable'}")
+    try:
+        # Read JSON input from stdin
+        input_data = sys.stdin.read()
+        data = json.loads(input_data) if input_data.strip() else {}
+
+        # Extract event data
+        event_type = data.get("type", data.get("event_type", "context_status"))
+        working_dir = data.get("working_directory", os.getcwd())
+
+        # Route to appropriate handler
+        if event_type == "load_agent":
+            agent_name = data.get("agent_name", data.get("tool_input", {}).get("agent_name", ""))
+            result = enhance_agent_loading(agent_name, working_dir)
+            response = {
+                "status": "success" if result else "error",
+                "agent": result,
+                "enhanced": result.get("_context_enhanced", False) if result else False
+            }
+        elif event_type == "suggest_agents":
+            user_input = data.get("user_input", data.get("prompt", ""))
+            suggestions = get_agent_suggestions(user_input, working_dir)
+            response = {
+                "status": "success",
+                "suggestions": suggestions
+            }
+        elif event_type == "list_agents":
+            agents = list_all_agents(working_dir)
+            response = {
+                "status": "success",
+                "agents": agents
+            }
+        else:  # context_status or default
+            status = get_context_status(working_dir)
+            response = {
+                "status": "success",
+                "context": status
+            }
+
+        response["system_available"] = CONTEXT_SYSTEM_AVAILABLE
+        print(json.dumps(response, indent=2))
+
+    except json.JSONDecodeError as e:
+        response = {"status": "error", "error": f"Invalid JSON input: {e}"}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on errors
+    except Exception as e:
+        response = {"status": "error", "error": str(e)}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on errors

@@ -1,5 +1,5 @@
 ---
-name: review
+name: pop:review
 description: Code review with confidence-based filtering - only reports high-confidence issues (80+ threshold)
 ---
 

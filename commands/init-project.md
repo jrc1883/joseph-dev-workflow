@@ -1,5 +1,5 @@
 ---
-name: init-project
+name: pop:init-project
 description: Initialize new project with .claude/ directory structure
 ---
 

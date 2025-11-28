@@ -1,5 +1,5 @@
 ---
-name: pr
+name: pop:pr
 description: GitHub pull request management - create, list, view, merge, review with templates
 ---
 

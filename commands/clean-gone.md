@@ -1,5 +1,5 @@
 ---
-name: clean-gone
+name: pop:clean-gone
 description: Remove local branches whose remote tracking branches are gone (after PR merge)
 ---
 

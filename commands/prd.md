@@ -1,5 +1,5 @@
 ---
-name: prd
+name: pop:prd
 description: Create Product Requirements Document from brainstorming session
 ---
 

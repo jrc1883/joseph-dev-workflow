@@ -1,6 +1,6 @@
-# joseph-dev-workflow
+# popkit
 
-Universal development workflow plugin for Claude Code with AI-powered skills, agents, and automation.
+Pop Toolkit - AI-powered development workflows for Claude Code with skills, agents, and automation. All commands use the `pop:` prefix (e.g., `/pop:commit`, `/pop:review`).
 
 ## Features
 
@@ -14,13 +14,13 @@ Universal development workflow plugin for Claude Code with AI-powered skills, ag
 ## Installation
 
 ```bash
-claude plugins add joseph-dev-workflow
+claude plugins add popkit
 ```
 
 Or install from GitHub:
 
 ```bash
-claude plugins add https://github.com/jrc1883/joseph-dev-workflow
+claude plugins add https://github.com/jrc1883/popkit
 ```
 
 ## Quick Start
@@ -28,32 +28,32 @@ claude plugins add https://github.com/jrc1883/joseph-dev-workflow
 ### New Project Setup
 
 ```bash
-/init-project           # Create .claude/ structure
-/prd                    # Create requirements document
-/analyze-project        # Discover patterns and opportunities
-/setup-precommit        # Configure quality gates
-/generate-mcp           # Create project-specific MCP server
+/pop:init-project           # Create .claude/ structure
+/pop:prd                    # Create requirements document
+/pop:analyze-project        # Discover patterns and opportunities
+/pop:setup-precommit        # Configure quality gates
+/pop:generate-mcp           # Create project-specific MCP server
 ```
 
 ### Feature Development
 
 ```bash
-/brainstorm             # Refine idea with Socratic questioning
-/worktree create feat-x # Create isolated workspace
-/write-plan             # Generate implementation plan
-/execute-plan           # Build with TDD
-/review                 # Code review with confidence filtering
-/finish-branch          # Merge, PR, keep, or discard
+/pop:brainstorm             # Refine idea with Socratic questioning
+/pop:worktree create feat-x # Create isolated workspace
+/pop:write-plan             # Generate implementation plan
+/pop:execute-plan           # Build with TDD
+/pop:review                 # Code review with confidence filtering
+/pop:finish-branch          # Merge, PR, keep, or discard
 ```
 
 ### Issue-Driven Development
 
 ```bash
-/issue create           # Create AI-executable GitHub issue
-/worktree create fix-123
-/debug                  # Systematic debugging
-/pr create              # Submit fix with template
-/issue close            # Mark complete
+/pop:issue create           # Create AI-executable GitHub issue
+/pop:worktree create fix-123
+/pop:debug                  # Systematic debugging
+/pop:pr create              # Submit fix with template
+/pop:issue close            # Mark complete
 ```
 
 ## Commands Reference
@@ -61,42 +61,42 @@ claude plugins add https://github.com/jrc1883/joseph-dev-workflow
 ### Core Workflow
 | Command | Description |
 |---------|-------------|
-| `/brainstorm` | Interactive design refinement using Socratic method |
-| `/write-plan` | Create detailed implementation plan |
-| `/execute-plan` | Execute plan in batches with review checkpoints |
-| `/debug` | Systematic debugging with root cause analysis |
-| `/review` | Code review with confidence-based filtering |
-| `/feature-dev` | 7-phase feature development workflow |
+| `/pop:brainstorm` | Interactive design refinement using Socratic method |
+| `/pop:write-plan` | Create detailed implementation plan |
+| `/pop:execute-plan` | Execute plan in batches with review checkpoints |
+| `/pop:debug` | Systematic debugging with root cause analysis |
+| `/pop:review` | Code review with confidence-based filtering |
+| `/pop:feature-dev` | 7-phase feature development workflow |
 
 ### Git Operations
 | Command | Description |
 |---------|-------------|
-| `/commit` | Auto-generate commit message matching repo style |
-| `/commit-push-pr` | Full workflow: branch -> commit -> push -> PR |
-| `/clean-gone` | Remove stale branches after PR merges |
-| `/worktree create <name>` | Create isolated workspace with branch |
-| `/worktree analyze` | Identify worktree opportunities |
-| `/finish-branch` | Complete work with 4-option flow |
+| `/pop:commit` | Auto-generate commit message matching repo style |
+| `/pop:commit-push-pr` | Full workflow: branch -> commit -> push -> PR |
+| `/pop:clean-gone` | Remove stale branches after PR merges |
+| `/pop:worktree create <name>` | Create isolated workspace with branch |
+| `/pop:worktree analyze` | Identify worktree opportunities |
+| `/pop:finish-branch` | Complete work with 4-option flow |
 
 ### GitHub Lifecycle
 | Command | Description |
 |---------|-------------|
-| `/issue create` | Create AI-executable GitHub issue |
-| `/issue list/view/close` | Issue management |
-| `/pr create` | Create PR with template |
-| `/pr list/view/merge` | PR management |
-| `/run list/view/rerun` | GitHub Actions management |
-| `/release create` | Create GitHub release |
+| `/pop:issue create` | Create AI-executable GitHub issue |
+| `/pop:issue list/view/close` | Issue management |
+| `/pop:pr create` | Create PR with template |
+| `/pop:pr list/view/merge` | PR management |
+| `/pop:run list/view/rerun` | GitHub Actions management |
+| `/pop:release create` | Create GitHub release |
 
 ### Project Setup
 | Command | Description |
 |---------|-------------|
-| `/init-project` | Initialize new project with .claude/ structure |
-| `/prd` | Create Product Requirements Document |
-| `/generate-mcp` | Generate project-specific MCP server |
-| `/generate-skills` | Generate project-specific skills |
-| `/analyze-project` | Full codebase analysis |
-| `/setup-precommit` | Configure pre-commit hooks |
+| `/pop:init-project` | Initialize new project with .claude/ structure |
+| `/pop:prd` | Create Product Requirements Document |
+| `/pop:generate-mcp` | Generate project-specific MCP server |
+| `/pop:generate-skills` | Generate project-specific skills |
+| `/pop:analyze-project` | Full codebase analysis |
+| `/pop:setup-precommit` | Configure pre-commit hooks |
 
 ## Agents
 
@@ -135,30 +135,29 @@ claude plugins add https://github.com/jrc1883/joseph-dev-workflow
 ## Skills
 
 ### Core Development
-- `brainstorming` - Design refinement through Socratic questioning
-- `systematic-debugging` - 4-phase debugging framework
-- `writing-plans` - Detailed implementation planning
-- `executing-plans` - Plan execution with review checkpoints
-- `tdd` - Test-driven development workflow
-- `verification` - Pre-completion verification
-- `root-cause-tracing` - Bug backward tracing
-- `code-review` - Quality review with confidence scoring
-- `simplification-cascades` - Complexity reduction
+- `pop:brainstorming` - Design refinement through Socratic questioning
+- `pop:systematic-debugging` - 4-phase debugging framework
+- `pop:writing-plans` - Detailed implementation planning
+- `pop:executing-plans` - Plan execution with review checkpoints
+- `pop:test-driven-development` - Test-driven development workflow
+- `pop:verification-before-completion` - Pre-completion verification
+- `pop:root-cause-tracing` - Bug backward tracing
+- `pop:code-review` - Quality review with confidence scoring
+- `pop:simplification-cascades` - Complexity reduction
 
 ### Session Management
-- `session-capture` - Save session state to STATUS.json
-- `session-resume` - Restore context on startup
-- `context-restore` - Load previous session context
+- `pop:session-capture` - Save session state to STATUS.json
+- `pop:session-resume` - Restore context on startup
+- `pop:context-restore` - Load previous session context
 
 ### Generators
-- `project-init` - Scaffold new projects
-- `prd-creator` - Create PRDs from brainstorming
-- `mcp-generator` - Generate project-specific MCP servers
-- `skill-generator` - Generate project-specific skills
+- `pop:project-init` - Scaffold new projects
+- `pop:mcp-generator` - Generate project-specific MCP servers
+- `pop:skill-generator` - Generate project-specific skills
 
 ### Analysis
-- `analyze-project` - Full codebase analysis
-- `setup-precommit` - Configure pre-commit hooks
+- `pop:analyze-project` - Full codebase analysis
+- `pop:setup-precommit` - Configure pre-commit hooks
 
 ### Design & Quality
 - `frontend-design` - UI/UX with bold typography, color, motion
@@ -202,8 +201,8 @@ This plugin implements a **two-tier architecture**:
 
 Generate Tier 2 tooling with:
 ```bash
-/generate-mcp       # Creates .claude/mcp-servers/[project]-dev/
-/generate-skills    # Creates .claude/skills/[project]-*
+/pop:generate-mcp       # Creates .claude/mcp-servers/[project]-dev/
+/pop:generate-skills    # Creates .claude/skills/[project]-*
 ```
 
 ## Alignment with Anthropic Best Practices

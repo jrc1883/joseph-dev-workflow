@@ -511,44 +511,67 @@ class PostToolUseHook:
         return result
 
 def main():
-    """Main entry point for the hook"""
-    if len(sys.argv) < 4:
-        print("Usage: post-tool-use.py <tool_name> <tool_args_json> <tool_result_json> [execution_time]", file=sys.stderr)
-        sys.exit(1)
-    
-    tool_name = sys.argv[1]
+    """Main entry point for the hook - JSON stdin/stdout protocol"""
     try:
-        tool_args = json.loads(sys.argv[2])
-        tool_result = json.loads(sys.argv[3])
+        # Read JSON input from stdin
+        input_data = json.loads(sys.stdin.read())
+
+        tool_name = input_data.get("tool_name", "")
+        tool_args = input_data.get("tool_input", {})
+        tool_result = input_data.get("tool_response", {})
+        execution_time = input_data.get("execution_time", 0.0)
+
+        if not tool_name:
+            response = {"error": "No tool_name provided in input"}
+            print(json.dumps(response))
+            sys.exit(1)
+
+        hook = PostToolUseHook()
+        result = hook.process_tool_completion(tool_name, tool_args, tool_result, execution_time)
+
+        # Build JSON response
+        response = {
+            "status": "success",
+            "tool_name": tool_name,
+            "session_id": result.get("session_id"),
+            "analysis": result.get("analysis", {}),
+            "followup_agents": result.get("followup_agents", []),
+            "recommendations": result.get("recommendations", []),
+            "metrics": result.get("metrics", {})
+        }
+
+        # Output analysis and recommendations to stderr for visibility
+        if result["analysis"].get("issues"):
+            for issue in result["analysis"]["issues"]:
+                print(f"⚠️  {issue}", file=sys.stderr)
+
+        if result["recommendations"]:
+            for recommendation in result["recommendations"]:
+                print(f"💡 {recommendation}", file=sys.stderr)
+
+        if result["followup_agents"]:
+            print(f"🔄 Suggested follow-up agents: {', '.join(result['followup_agents'])}", file=sys.stderr)
+
+        # Quality score
+        quality_score = result["metrics"].get("quality_score", 0.0)
+        if quality_score < 0.5:
+            print(f"⚡ Quality Score: {quality_score:.1f} - Consider review", file=sys.stderr)
+        elif quality_score > 0.8:
+            print(f"✨ Quality Score: {quality_score:.1f} - Excellent", file=sys.stderr)
+
+        print(f"✅ Tool {tool_name} analysis complete", file=sys.stderr)
+
+        # Output JSON response to stdout
+        print(json.dumps(response))
+
     except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON in arguments: {e}", file=sys.stderr)
+        response = {"error": f"Invalid JSON input: {e}", "status": "error"}
+        print(json.dumps(response))
         sys.exit(1)
-    
-    execution_time = float(sys.argv[4]) if len(sys.argv) > 4 else 0.0
-    
-    hook = PostToolUseHook()
-    result = hook.process_tool_completion(tool_name, tool_args, tool_result, execution_time)
-    
-    # Output analysis and recommendations
-    if result["analysis"].get("issues"):
-        for issue in result["analysis"]["issues"]:
-            print(f"⚠️  {issue}", file=sys.stderr)
-    
-    if result["recommendations"]:
-        for recommendation in result["recommendations"]:
-            print(f"💡 {recommendation}", file=sys.stderr)
-    
-    if result["followup_agents"]:
-        print(f"🔄 Suggested follow-up agents: {', '.join(result['followup_agents'])}", file=sys.stderr)
-    
-    # Quality score
-    quality_score = result["metrics"].get("quality_score", 0.0)
-    if quality_score < 0.5:
-        print(f"⚡ Quality Score: {quality_score:.1f} - Consider review", file=sys.stderr)
-    elif quality_score > 0.8:
-        print(f"✨ Quality Score: {quality_score:.1f} - Excellent", file=sys.stderr)
-    
-    print(f"✅ Tool {tool_name} analysis complete", file=sys.stderr)
+    except Exception as e:
+        response = {"error": str(e), "status": "error"}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on errors
 
 if __name__ == "__main__":
     main()

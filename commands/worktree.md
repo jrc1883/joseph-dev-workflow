@@ -1,16 +1,16 @@
 ---
-name: worktree
+name: pop:worktree
 description: Manage git worktrees for parallel development - create, list, analyze, remove
 ---
 
-# /worktree - Git Worktree Management
+# /pop:worktree - Git Worktree Management
 
 Create and manage isolated workspaces for parallel development.
 
 ## Usage
 
 ```
-/worktree <subcommand> [options]
+/pop:worktree <subcommand> [options]
 ```
 
 ## Subcommands
@@ -20,9 +20,9 @@ Create and manage isolated workspaces for parallel development.
 Create new worktree with branch:
 
 ```
-/worktree create <name>
-/worktree create feature/auth
-/worktree create fix-123 --from main
+/pop:worktree create <name>
+/pop:worktree create feature/auth
+/pop:worktree create fix-123 --from main
 ```
 
 Process:
@@ -38,7 +38,7 @@ Process:
 List all worktrees:
 
 ```
-/worktree list
+/pop:worktree list
 ```
 
 Output:
@@ -54,7 +54,7 @@ Worktrees:
 Find opportunities for worktrees:
 
 ```
-/worktree analyze
+/pop:worktree analyze
 ```
 
 Checks for:
@@ -67,8 +67,8 @@ Checks for:
 Remove worktree and optionally branch:
 
 ```
-/worktree remove <name>
-/worktree remove feature/auth --keep-branch
+/pop:worktree remove <name>
+/pop:worktree remove feature/auth --keep-branch
 ```
 
 Process:
@@ -83,14 +83,14 @@ Process:
 Clean up stale worktrees:
 
 ```
-/worktree prune
+/pop:worktree prune
 ```
 
 Removes worktrees with deleted directories.
 
 ## Integration
 
-Uses **using-git-worktrees** skill for:
+Uses **pop:using-git-worktrees** skill for:
 - Directory selection logic
 - .gitignore verification
 - Project setup detection
@@ -100,14 +100,14 @@ Uses **using-git-worktrees** skill for:
 
 ```
 # Start new feature
-/worktree create feature/user-profiles
+/pop:worktree create feature/user-profiles
 
 # See all workspaces
-/worktree list
+/pop:worktree list
 
 # Clean up after merge
-/worktree remove feature/user-profiles
+/pop:worktree remove feature/user-profiles
 
 # Find parallel work opportunities
-/worktree analyze
+/pop:worktree analyze
 ```

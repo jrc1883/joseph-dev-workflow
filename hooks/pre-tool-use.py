@@ -414,43 +414,64 @@ class PreToolUseHook:
         return result
 
 def main():
-    """Main entry point for the hook"""
-    if len(sys.argv) < 3:
-        print("Usage: pre-tool-use.py <tool_name> <tool_args_json>", file=sys.stderr)
-        sys.exit(1)
-    
-    tool_name = sys.argv[1]
+    """Main entry point for the hook - JSON stdin/stdout protocol"""
     try:
-        tool_args = json.loads(sys.argv[2])
-    except json.JSONDecodeError:
-        print("Error: Invalid JSON in tool arguments", file=sys.stderr)
+        # Read JSON input from stdin
+        input_data = json.loads(sys.stdin.read())
+
+        tool_name = input_data.get("tool_name", "")
+        tool_args = input_data.get("tool_input", {})
+
+        if not tool_name:
+            response = {"error": "No tool_name provided in input"}
+            print(json.dumps(response))
+            sys.exit(1)
+
+        hook = PreToolUseHook()
+        result = hook.process_tool_request(tool_name, tool_args)
+
+        # Build JSON response
+        response = {
+            "decision": "allow" if result["action"] != "block" else "block",
+            "reason": None,
+            "tool_name": tool_name,
+            "session_id": result.get("session_id"),
+            "warnings": result.get("warnings", []),
+            "recommendations": result.get("recommendations", [])
+        }
+
+        if result["action"] == "block":
+            response["reason"] = "; ".join(result["safety_check"]["violations"])
+            print(f"🚫 Tool execution blocked: {tool_name}", file=sys.stderr)
+            for violation in result["safety_check"]["violations"]:
+                print(f"   - {violation}", file=sys.stderr)
+        else:
+            # Output warnings and recommendations to stderr for visibility
+            if result["warnings"]:
+                for warning in result["warnings"]:
+                    print(f"⚠️  {warning}", file=sys.stderr)
+
+            if result["recommendations"]:
+                for recommendation in result["recommendations"]:
+                    print(f"💡 {recommendation}", file=sys.stderr)
+
+            if result["coordination"].get("conflicts"):
+                for conflict in result["coordination"]["conflicts"]:
+                    print(f"🔄 {conflict}", file=sys.stderr)
+
+            print(f"✅ Tool {tool_name} approved for execution", file=sys.stderr)
+
+        # Output JSON response to stdout
+        print(json.dumps(response))
+
+    except json.JSONDecodeError as e:
+        response = {"error": f"Invalid JSON input: {e}", "decision": "block"}
+        print(json.dumps(response))
         sys.exit(1)
-    
-    hook = PreToolUseHook()
-    result = hook.process_tool_request(tool_name, tool_args)
-    
-    if result["action"] == "block":
-        print(f"🚫 Tool execution blocked: {tool_name}", file=sys.stderr)
-        for violation in result["safety_check"]["violations"]:
-            print(f"   - {violation}", file=sys.stderr)
-        sys.exit(1)
-    
-    # Output warnings and recommendations
-    if result["warnings"]:
-        for warning in result["warnings"]:
-            print(f"⚠️  {warning}", file=sys.stderr)
-    
-    if result["recommendations"]:
-        for recommendation in result["recommendations"]:
-            print(f"💡 {recommendation}", file=sys.stderr)
-    
-    # Output coordination information
-    if result["coordination"].get("conflicts"):
-        for conflict in result["coordination"]["conflicts"]:
-            print(f"🔄 {conflict}", file=sys.stderr)
-    
-    # Allow tool execution to continue
-    print(f"✅ Tool {tool_name} approved for execution", file=sys.stderr)
+    except Exception as e:
+        response = {"error": str(e), "decision": "allow"}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on errors
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,5 @@
 ---
-name: finish-branch
+name: pop:finish-branch
 description: Complete development work with 4-option flow - merge, PR, keep, or discard
 ---
 

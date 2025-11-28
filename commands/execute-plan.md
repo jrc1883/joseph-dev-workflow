@@ -1,5 +1,5 @@
 ---
-name: execute-plan
+name: pop:execute-plan
 description: Execute implementation plan in batches with review checkpoints
 ---
 

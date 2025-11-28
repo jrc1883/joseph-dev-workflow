@@ -1,5 +1,5 @@
 ---
-name: commit
+name: pop:commit
 description: Auto-generate commit message matching repository style with conventional commits
 ---
 

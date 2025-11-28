@@ -352,25 +352,47 @@ class AgentOrchestrator:
 
 
 def main():
-    """Main entry point for hook"""
-    orchestrator = AgentOrchestrator()
-    
-    # Read prompt from stdin or command line
-    if len(sys.argv) > 1:
-        prompt = ' '.join(sys.argv[1:])
-    else:
-        prompt = sys.stdin.read().strip()
-    
-    if not prompt:
-        print(json.dumps({'error': 'No prompt provided'}))
-        return 1
-    
+    """Main entry point for hook - JSON stdin/stdout protocol"""
     try:
+        # Read JSON input from stdin
+        input_data = sys.stdin.read()
+        data = json.loads(input_data) if input_data.strip() else {}
+
+        # Extract prompt from JSON
+        prompt = data.get("prompt", data.get("user_prompt", ""))
+        tool_name = data.get("tool_name", "")
+        tool_input = data.get("tool_input", {})
+
+        # If this is a Task tool call, use the prompt from tool_input
+        if tool_name == "Task":
+            prompt = tool_input.get("prompt", prompt)
+
+        if not prompt:
+            response = {
+                "status": "error",
+                "error": "No prompt provided",
+                "decision": "allow"
+            }
+            print(json.dumps(response))
+            return 1
+
+        orchestrator = AgentOrchestrator()
         result = orchestrator.execute(prompt)
+
+        # Add decision field for hook protocol compliance
+        result["decision"] = "allow"
+        result["status"] = "success"
+
         print(json.dumps(result, indent=2))
         return 0
+
+    except json.JSONDecodeError as e:
+        response = {"status": "error", "error": f"Invalid JSON input: {e}", "decision": "allow"}
+        print(json.dumps(response))
+        return 1
     except Exception as e:
-        print(json.dumps({'error': str(e)}))
+        response = {"status": "error", "error": str(e), "decision": "allow"}
+        print(json.dumps(response))
         return 1
 
 

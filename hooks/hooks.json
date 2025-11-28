@@ -1,0 +1,106 @@
+{
+  "$schema": "https://claude.ai/schemas/hooks.json",
+  "version": "1.0.0",
+  "hooks": [
+    {
+      "name": "pre-tool-use",
+      "event": "PreToolUse",
+      "command": "python",
+      "args": ["hooks/pre-tool-use.py"],
+      "description": "Safety checks, agent coordination, and orchestration before tool execution",
+      "timeout": 5000,
+      "enabled": true,
+      "tools": ["*"]
+    },
+    {
+      "name": "post-tool-use",
+      "event": "PostToolUse",
+      "command": "python",
+      "args": ["hooks/post-tool-use.py"],
+      "description": "Cleanup, validation, and result processing after tool execution",
+      "timeout": 5000,
+      "enabled": true,
+      "tools": ["*"]
+    },
+    {
+      "name": "user-prompt-submit",
+      "event": "UserPromptSubmit",
+      "command": "python",
+      "args": ["hooks/user-prompt-submit.py"],
+      "description": "Process and enrich user prompts before sending to Claude",
+      "timeout": 3000,
+      "enabled": true
+    },
+    {
+      "name": "session-start",
+      "event": "SessionStart",
+      "command": "python",
+      "args": ["hooks/session-start.py"],
+      "description": "Initialize session context, load previous state, and set up environment",
+      "timeout": 10000,
+      "enabled": true
+    },
+    {
+      "name": "stop",
+      "event": "Stop",
+      "command": "python",
+      "args": ["hooks/stop.py"],
+      "description": "Save session state and perform cleanup on session end",
+      "timeout": 5000,
+      "enabled": true
+    },
+    {
+      "name": "subagent-stop",
+      "event": "SubagentStop",
+      "command": "python",
+      "args": ["hooks/subagent-stop.py"],
+      "description": "Handle subagent completion, collect results, and coordinate handoffs",
+      "timeout": 5000,
+      "enabled": true
+    },
+    {
+      "name": "notification",
+      "event": "Notification",
+      "command": "python",
+      "args": ["hooks/notification.py"],
+      "description": "Process and route system notifications",
+      "timeout": 3000,
+      "enabled": true
+    },
+    {
+      "name": "agent-orchestrator",
+      "event": "PreToolUse",
+      "command": "python",
+      "args": ["hooks/agent-orchestrator.py"],
+      "description": "Route tasks to appropriate agents based on context and tool patterns",
+      "timeout": 5000,
+      "enabled": true,
+      "tools": ["Task"]
+    },
+    {
+      "name": "agent-context-integration",
+      "event": "PostToolUse",
+      "command": "python",
+      "args": ["hooks/agent-context-integration.py"],
+      "description": "Integrate agent results into shared context and coordinate state",
+      "timeout": 5000,
+      "enabled": true,
+      "tools": ["Task"]
+    },
+    {
+      "name": "agent-observability",
+      "event": "PostToolUse",
+      "command": "python",
+      "args": ["hooks/agent-observability.py"],
+      "description": "Track agent performance metrics and log events for debugging",
+      "timeout": 3000,
+      "enabled": true,
+      "tools": ["*"]
+    }
+  ],
+  "settings": {
+    "continueOnError": false,
+    "logLevel": "info",
+    "metricsEnabled": true
+  }
+}

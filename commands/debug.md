@@ -1,24 +1,24 @@
 ---
-name: debug
+name: pop:debug
 description: Systematic debugging with root cause analysis - 4-phase framework
 ---
 
-# /debug - Systematic Debugging
+# /pop:debug - Systematic Debugging
 
 Systematic approach to finding and fixing bugs with root cause analysis.
 
 ## Usage
 
 ```
-/debug [issue-description]
-/debug                         # Describe issue interactively
-/debug "login fails on mobile"
-/debug --test failing-test.ts  # Debug specific test
+/pop:debug [issue-description]
+/pop:debug                         # Describe issue interactively
+/pop:debug "login fails on mobile"
+/pop:debug --test failing-test.ts  # Debug specific test
 ```
 
 ## Process
 
-Invokes the **systematic-debugging** skill:
+Invokes the **pop:systematic-debugging** skill:
 
 ### Phase 1: Root Cause Investigation
 
@@ -83,14 +83,14 @@ The skill will stop and return to Phase 1 if:
 ## Options
 
 ```
-/debug --verbose               # Show all investigation steps
-/debug --skip-phase-1          # If already investigated (rare)
+/pop:debug --verbose               # Show all investigation steps
+/pop:debug --skip-phase-1          # If already investigated (rare)
 ```
 
 ## Example Session
 
 ```
-/debug "Users getting logged out randomly"
+/pop:debug "Users getting logged out randomly"
 
 Phase 1: Investigation
 - Error: "Token expired" in console
@@ -115,6 +115,6 @@ Verify: Test passes, manual test confirms
 ## Integration
 
 Uses skills:
-- **root-cause-tracing** - When errors are deep in stack
-- **defense-in-depth** - Adding validation layers after fix
-- **test-driven-development** - Creating regression test
+- **pop:root-cause-tracing** - When errors are deep in stack
+- **pop:defense-in-depth** - Adding validation layers after fix
+- **pop:test-driven-development** - Creating regression test

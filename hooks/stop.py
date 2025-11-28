@@ -6,7 +6,6 @@ Handles session termination and cleanup.
 
 import sys
 import json
-import argparse
 from pathlib import Path
 from datetime import datetime
 
@@ -50,28 +49,39 @@ def save_chat_transcript(data, chat_file):
             json.dump(data['transcript'], f, indent=2)
 
 def main():
-    parser = argparse.ArgumentParser(description="Stop Hook")
-    parser.add_argument('--chat', action='store_true', 
-                       help='Save transcript to chat.json')
-    
-    args = parser.parse_args()
-    
+    """Main entry point for the hook - JSON stdin/stdout protocol"""
     try:
         # Read input data from stdin
         input_data = sys.stdin.read()
         data = json.loads(input_data) if input_data.strip() else {}
-        
+
         # Log the session stop
         log_session_stop(data)
-        
-        # Save chat transcript if requested
-        if args.chat:
+
+        # Check if chat saving is requested via data
+        save_chat = data.get("save_chat", data.get("chat", False))
+        if save_chat and 'transcript' in data:
             save_chat_transcript(data, "chat.json")
-        
-        # Print completion message
+
+        # Print completion message to stderr
         print("Session ended - logs saved", file=sys.stderr)
-        
+
+        # Output JSON response to stdout
+        response = {
+            "status": "success",
+            "message": "Session ended - logs saved",
+            "timestamp": datetime.now().isoformat(),
+            "chat_saved": save_chat and 'transcript' in data
+        }
+        print(json.dumps(response))
+
+    except json.JSONDecodeError as e:
+        response = {"status": "error", "error": f"Invalid JSON input: {e}"}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on errors
     except Exception as e:
+        response = {"status": "error", "error": str(e)}
+        print(json.dumps(response))
         print(f"Error in stop hook: {e}", file=sys.stderr)
         sys.exit(0)  # Don't block on errors
 

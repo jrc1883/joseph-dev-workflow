@@ -76,37 +76,56 @@ def track_collaboration(from_agent, to_agent, collaboration_type, metadata=None)
     send_to_optimus(OPTIMUS_COLLABORATION_ENDPOINT, collab_data)
 
 def main():
-    """Main hook entry point"""
-    if len(sys.argv) < 2:
-        return
-    
-    hook_type = sys.argv[1]
-    
-    if hook_type == "post-tool-use" and len(sys.argv) >= 4:
-        tool_name = sys.argv[2]
-        try:
-            tool_args = json.loads(sys.argv[3]) if sys.argv[3] else {}
-            tool_result = json.loads(sys.argv[4]) if len(sys.argv) > 4 else None
-            execution_time = float(sys.argv[5]) if len(sys.argv) > 5 else 0
-            
-            track_tool_use(tool_name, tool_args, tool_result, execution_time)
-        except:
-            pass
-    
-    elif hook_type == "agent-activation" and len(sys.argv) >= 4:
-        agent_name = sys.argv[2]
-        task_type = sys.argv[3]
-        context = json.loads(sys.argv[4]) if len(sys.argv) > 4 else None
-        
-        track_agent_activation(agent_name, task_type, context)
-    
-    elif hook_type == "agent-collaboration" and len(sys.argv) >= 5:
-        from_agent = sys.argv[2]
-        to_agent = sys.argv[3]
-        collab_type = sys.argv[4]
-        metadata = json.loads(sys.argv[5]) if len(sys.argv) > 5 else None
-        
-        track_collaboration(from_agent, to_agent, collab_type, metadata)
+    """Main hook entry point - JSON stdin/stdout protocol"""
+    try:
+        # Read JSON input from stdin
+        input_data = sys.stdin.read()
+        data = json.loads(input_data) if input_data.strip() else {}
+
+        # Determine event type
+        event_type = data.get("event_type", data.get("type", "post-tool-use"))
+
+        if event_type == "post-tool-use" or "tool_name" in data:
+            tool_name = data.get("tool_name", "")
+            tool_args = data.get("tool_input", data.get("tool_args", {}))
+            tool_result = data.get("tool_response", data.get("tool_result"))
+            execution_time = data.get("execution_time", 0)
+
+            if tool_name:
+                track_tool_use(tool_name, tool_args, tool_result, execution_time)
+
+        elif event_type == "agent-activation":
+            agent_name = data.get("agent_name", "")
+            task_type = data.get("task_type", "")
+            context = data.get("context")
+
+            if agent_name:
+                track_agent_activation(agent_name, task_type, context)
+
+        elif event_type == "agent-collaboration":
+            from_agent = data.get("from_agent", "")
+            to_agent = data.get("to_agent", "")
+            collab_type = data.get("collaboration_type", "")
+            metadata = data.get("metadata")
+
+            if from_agent and to_agent:
+                track_collaboration(from_agent, to_agent, collab_type, metadata)
+
+        # Output JSON response
+        response = {
+            "status": "success",
+            "event_type": event_type,
+            "tracked": True,
+            "timestamp": datetime.now().isoformat()
+        }
+        print(json.dumps(response))
+
+    except json.JSONDecodeError as e:
+        response = {"status": "error", "error": f"Invalid JSON input: {e}"}
+        print(json.dumps(response))
+    except Exception as e:
+        response = {"status": "error", "error": str(e)}
+        print(json.dumps(response))
 
 if __name__ == "__main__":
     main()

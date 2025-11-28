@@ -6,7 +6,6 @@ Handles notifications with logging and optional TTS.
 
 import sys
 import json
-import argparse
 from pathlib import Path
 
 def create_logs_directory():
@@ -54,26 +53,38 @@ def announce_notification(message):
         pass  # Silent failure for TTS
 
 def main():
-    parser = argparse.ArgumentParser(description="Notification Hook")
-    parser.add_argument('--notify', action='store_true', 
-                       help='Enable TTS notification')
-    
-    args = parser.parse_args()
-    
+    """Main entry point for the hook - JSON stdin/stdout protocol"""
     try:
         # Read input data from stdin
         input_data = sys.stdin.read()
         data = json.loads(input_data) if input_data.strip() else {}
-        
+
         # Log the notification
         log_notification(data)
-        
-        # Announce if requested
-        if args.notify:
+
+        # Check if TTS notification is requested via data
+        should_notify = data.get("notify", data.get("tts", False))
+        if should_notify:
             message = data.get('message', 'Notification')
             announce_notification(message)
-        
+
+        # Output JSON response to stdout
+        from datetime import datetime
+        response = {
+            "status": "success",
+            "message": "Notification logged",
+            "timestamp": datetime.now().isoformat(),
+            "tts_announced": should_notify
+        }
+        print(json.dumps(response))
+
+    except json.JSONDecodeError as e:
+        response = {"status": "error", "error": f"Invalid JSON input: {e}"}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on errors
     except Exception as e:
+        response = {"status": "error", "error": str(e)}
+        print(json.dumps(response))
         print(f"Error in notification hook: {e}", file=sys.stderr)
         sys.exit(0)  # Don't block on errors
 

@@ -348,31 +348,56 @@ class UserPromptSubmitHook:
         return original_prompt
 
 def main():
-    """Main entry point for the hook"""
-    if len(sys.argv) < 2:
-        print("Usage: user-prompt-submit.py <user_prompt>", file=sys.stderr)
-        sys.exit(1)
-    
-    user_prompt = " ".join(sys.argv[1:])
-    
-    hook = UserPromptSubmitHook()
-    result = hook.process_prompt(user_prompt)
-    
-    if result["action"] == "block":
-        print(f"🚫 Security Alert: {result['reason']}", file=sys.stderr)
-        for issue in result["issues"]:
-            print(f"   - {issue}", file=sys.stderr)
-        sys.exit(1)
-    
-    # Output enhanced prompt for Claude to use
-    print(result["enhanced_prompt"])
-    
-    # Debug information to stderr
-    if result["detected_agents"]:
-        agent_summary = []
-        for category, agents in result["detected_agents"].items():
-            agent_summary.append(f"{category}: {', '.join(agents.keys())}")
-        print(f"🎯 Agents activated: {' | '.join(agent_summary)}", file=sys.stderr)
+    """Main entry point for the hook - JSON stdin/stdout protocol"""
+    try:
+        # Read JSON input from stdin
+        input_data = json.loads(sys.stdin.read())
+
+        user_prompt = input_data.get("prompt", input_data.get("user_prompt", ""))
+
+        if not user_prompt:
+            response = {"error": "No prompt provided in input", "decision": "block"}
+            print(json.dumps(response))
+            sys.exit(1)
+
+        hook = UserPromptSubmitHook()
+        result = hook.process_prompt(user_prompt)
+
+        # Build JSON response
+        response = {
+            "decision": "allow" if result["action"] != "block" else "block",
+            "reason": None,
+            "session_id": result.get("session_id"),
+            "detected_agents": result.get("detected_agents", {}),
+            "project_context": result.get("project_context", {}),
+            "enhanced_prompt": result.get("enhanced_prompt", user_prompt)
+        }
+
+        if result["action"] == "block":
+            response["reason"] = result.get("reason", "Security violation")
+            response["issues"] = result.get("issues", [])
+            print(f"🚫 Security Alert: {result['reason']}", file=sys.stderr)
+            for issue in result.get("issues", []):
+                print(f"   - {issue}", file=sys.stderr)
+        else:
+            # Debug information to stderr
+            if result.get("detected_agents"):
+                agent_summary = []
+                for category, agents in result["detected_agents"].items():
+                    agent_summary.append(f"{category}: {', '.join(agents.keys())}")
+                print(f"🎯 Agents activated: {' | '.join(agent_summary)}", file=sys.stderr)
+
+        # Output JSON response to stdout
+        print(json.dumps(response))
+
+    except json.JSONDecodeError as e:
+        response = {"error": f"Invalid JSON input: {e}", "decision": "allow"}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on JSON errors
+    except Exception as e:
+        response = {"error": str(e), "decision": "allow"}
+        print(json.dumps(response))
+        sys.exit(0)  # Don't block on errors
 
 if __name__ == "__main__":
     main()

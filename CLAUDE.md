@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**joseph-dev-workflow** is a Claude Code plugin providing AI-powered development workflows through skills, agents, commands, and hooks. It implements a two-tier architecture:
+**popkit** is a Claude Code plugin providing AI-powered development workflows through skills, agents, commands, and hooks. All commands use the `pop:` prefix (e.g., `/pop:commit`, `/pop:review`). It implements a two-tier architecture:
 
 - **Tier 1 (this repo)**: Universal, project-agnostic tools that work anywhere
 - **Tier 2 (generated)**: Project-specific MCP servers, skills, and agents created via `/generate-mcp` and `/generate-skills`
@@ -13,25 +13,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```
 .claude-plugin/          Plugin manifest (plugin.json, marketplace.json)
+.mcp.json                MCP server configuration
 agents/                  29 agent definitions with tiered activation
   config.json            Agent routing, workflows, confidence thresholds
   tier-1-always-active/  11 core agents (code-reviewer, bug-whisperer, etc.)
-  tier-2-on-demand/      15 specialized agents
-  feature-workflow/      3 agents for 7-phase feature development
-skills/                  21 reusable skill definitions (.md with YAML frontmatter)
-commands/                17 slash commands for workflows
-hooks/                   10 Python hooks for safety and orchestration
+  tier-2-on-demand/      16 specialized agents (including rapid-prototyper)
+  feature-workflow/      2 agents for 7-phase feature development
+skills/                  24 reusable skills (SKILL.md format in subdirectories)
+commands/                20 slash commands for workflows
+hooks/                   10 Python hooks (JSON stdin/stdout protocol)
+  hooks.json             Hook configuration and event mapping
 output-styles/           8 output format templates
 templates/mcp-server/    Template for generating project-specific MCP servers
+tests/                   Plugin self-test definitions
+  hooks/                 Hook input/output tests
+  routing/               Agent routing tests
+  structure/             File structure validation tests
 ```
 
 ## Development Notes
 
-This is a **configuration-only plugin** - no build, test, or lint commands exist. All content is:
+This is a **configuration-only plugin** - no build or lint commands exist. All content is:
 - Markdown files with YAML frontmatter (skills, commands, agents)
-- JSON configuration (plugin.json, config.json)
-- Python scripts (hooks)
+- JSON configuration (plugin.json, config.json, hooks.json, .mcp.json)
+- Python scripts (hooks with JSON stdin/stdout protocol)
 - TypeScript templates (mcp-server)
+- JSON test definitions (tests/)
+
+**Self-testing available:** Run `/pop:plugin-test` to validate plugin integrity.
 
 ## Key Architectural Patterns
 
@@ -51,29 +60,29 @@ Code review uses 80+ confidence threshold to filter issues:
 
 ### 7-Phase Feature Development
 
-The `/feature-dev` command and feature-workflow agents follow: Discovery → Exploration (code-explorer) → Questions → Architecture (code-architect) → Implementation → Review (code-reviewer) → Summary
+The `/pop:feature-dev` command and feature-workflow agents follow: Discovery → Exploration (code-explorer) → Questions → Architecture (code-architect) → Implementation → Review (code-reviewer) → Summary
 
 ### Session Continuity
 
 Three skills manage state between sessions:
-- `session-capture`: Saves state to STATUS.json
-- `session-resume`: Restores context on startup
-- `context-restore`: Loads previous session
+- `pop:session-capture`: Saves state to STATUS.json
+- `pop:session-resume`: Restores context on startup
+- `pop:context-restore`: Loads previous session
 
 ## The Chicken-and-Egg Problem
 
 When developing this plugin:
 1. The skills/agents you're editing are the same ones you're using to edit
 2. Changes to hooks affect the current session behavior
-3. Use `/worktree create` to test changes in isolation before merging
+3. Use `/pop:worktree create` to test changes in isolation before merging
 
 ## Testing Changes
 
-Since there's no test suite, verify changes by:
-1. Creating a test worktree: `/worktree create test-feature`
-2. Installing the plugin from the worktree path
-3. Running the modified command/skill/agent
-4. Comparing output to expected behavior
+Verify changes using the built-in test framework:
+1. Run `/pop:plugin-test` to validate all components
+2. Run `/pop:plugin-test hooks` to test hook JSON protocol
+3. Run `/pop:plugin-test routing` to verify agent selection
+4. For isolation: Create a worktree with `/pop:worktree create test-feature`
 
 ## MCP Server Template
 
@@ -95,10 +104,21 @@ npm run build
 | File | Purpose |
 |------|---------|
 | `.claude-plugin/plugin.json` | Plugin manifest and activation triggers |
+| `.mcp.json` | MCP server and tool configuration |
 | `agents/config.json` | All routing rules, workflows, confidence levels |
+| `hooks/hooks.json` | Hook event configuration |
 | `hooks/pre-tool-use.py` | Safety checks before tool execution |
 | `hooks/post-tool-use.py` | Cleanup and validation after tools |
 | `hooks/agent-orchestrator.py` | Agent sequencing and routing logic |
+
+## New Features (v1.1.0)
+
+- **Auto-Documentation** (`/pop:auto-docs`): Generate and sync documentation
+- **Plugin Self-Testing** (`/pop:plugin-test`): Validate all plugin components
+- **Routing Debugger** (`/pop:routing-debug`): Debug agent selection logic
+- **SKILL.md Format**: Skills now use directory structure (`skills/name/SKILL.md`)
+- **JSON Hook Protocol**: All hooks use stdin/stdout JSON instead of argv
+- **MCP Configuration**: `.mcp.json` for Model Context Protocol integration
 
 ## Conventions
 

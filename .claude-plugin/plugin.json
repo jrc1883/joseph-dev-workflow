@@ -1,7 +1,7 @@
 {
-  "name": "joseph-dev-workflow",
-  "version": "1.0.0",
-  "description": "Universal development workflow plugin with AI-powered skills, agents, and automation for Claude Code",
+  "name": "popkit",
+  "version": "1.1.0",
+  "description": "Pop Toolkit - AI-powered development workflows with skills, agents, and automation for Claude Code",
   "authors": [
     {
       "name": "Joseph Cannon",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jrc1883/joseph-dev-workflow"
+    "url": "https://github.com/jrc1883/popkit"
   },
   "keywords": [
     "claude-code",
@@ -25,9 +25,9 @@
     "debugging"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/jrc1883/joseph-dev-workflow#readme",
+  "homepage": "https://github.com/jrc1883/popkit#readme",
   "bugs": {
-    "url": "https://github.com/jrc1883/joseph-dev-workflow/issues"
+    "url": "https://github.com/jrc1883/popkit/issues"
   },
   "engines": {
     "claude-code": ">=1.0.0"
@@ -37,7 +37,12 @@
     "commands": true,
     "agents": true,
     "hooks": true,
-    "templates": true
+    "templates": true,
+    "mcp": true,
+    "tests": true
+  },
+  "hooks": {
+    "config": "hooks/hooks.json"
   },
   "activation": {
     "auto": true,

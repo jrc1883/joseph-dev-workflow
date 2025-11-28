@@ -1,5 +1,5 @@
 ---
-name: run
+name: pop:run
 description: GitHub Actions workflow management - list, view, rerun workflows and check statuses
 ---
 

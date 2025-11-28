@@ -1,5 +1,5 @@
 ---
-name: release
+name: pop:release
 description: GitHub release management - create releases, generate changelogs, tag versions
 ---
 
