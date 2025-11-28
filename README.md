@@ -20,7 +20,7 @@ claude plugins add joseph-dev-workflow
 Or install from GitHub:
 
 ```bash
-claude plugins add https://github.com/joseph-cannon/joseph-dev-workflow
+claude plugins add https://github.com/jrc1883/joseph-dev-workflow
 ```
 
 ## Quick Start

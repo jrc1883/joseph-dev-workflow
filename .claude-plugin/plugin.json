@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/joseph-cannon/joseph-dev-workflow"
+    "url": "https://github.com/jrc1883/joseph-dev-workflow"
   },
   "keywords": [
     "claude-code",
@@ -25,9 +25,9 @@
     "debugging"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/joseph-cannon/joseph-dev-workflow#readme",
+  "homepage": "https://github.com/jrc1883/joseph-dev-workflow#readme",
   "bugs": {
-    "url": "https://github.com/joseph-cannon/joseph-dev-workflow/issues"
+    "url": "https://github.com/jrc1883/joseph-dev-workflow/issues"
   },
   "engines": {
     "claude-code": ">=1.0.0"
