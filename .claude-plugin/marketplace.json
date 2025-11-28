@@ -1,7 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "joseph-dev-workflow-marketplace",
-  "owner": "jrc1883",
+  "owner": {
+    "name": "jrc1883",
+    "url": "https://github.com/jrc1883"
+  },
   "description": "Joseph's Development Workflow Tools",
   "plugins": [
     {
@@ -12,7 +15,7 @@
         "name": "Joseph Cannon",
         "email": "joseph.cannon@outlook.com"
       },
-      "source": "."
+      "source": "./"
     }
   ]
 }
