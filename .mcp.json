@@ -1,11 +1,11 @@
 {
   "$schema": "https://claude.ai/schemas/mcp.json",
   "version": "1.0.0",
-  "name": "joseph-dev-workflow",
-  "displayName": "Joseph Dev Workflow",
+  "name": "popkit",
+  "displayName": "Pop Toolkit",
   "description": "AI-powered development workflows through skills, agents, commands, and hooks",
   "publisher": "jrc1883",
-  "repository": "https://github.com/jrc1883/joseph-dev-workflow",
+  "repository": "https://github.com/jrc1883/popkit",
   "license": "MIT",
   "mcpServers": {
     "project-health": {

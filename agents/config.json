@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "Agent configuration for joseph-dev-workflow plugin",
+  "description": "Agent configuration for popkit plugin",
   "version": "1.0.0",
 
   "tiers": {
