@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "joseph-dev-workflow-marketplace",
+  "description": "Joseph's Development Workflow Tools",
+  "plugins": [
+    {
+      "id": "joseph-dev-workflow",
+      "name": "Joseph Dev Workflow",
+      "description": "Universal development workflow plugin with AI-powered skills, agents, and automation for Claude Code",
+      "version": "1.0.0",
+      "author": "Joseph Cannon",
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
+  ]
+}
