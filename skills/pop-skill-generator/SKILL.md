@@ -1,5 +1,5 @@
 ---
-name: popkit:skill-generator
+name: skill-generator
 description: "Use when you want to capture project-specific patterns as reusable skills - generates custom skills based on codebase patterns, common workflows, and team conventions discovered during analysis"
 ---
 

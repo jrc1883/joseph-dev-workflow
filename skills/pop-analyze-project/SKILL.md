@@ -1,5 +1,5 @@
 ---
-name: popkit:analyze-project
+name: analyze-project
 description: "Use when starting work on an unfamiliar project or needing to understand a codebase - performs comprehensive analysis discovering architecture, patterns, dependencies, testing coverage, and improvement opportunities"
 ---
 

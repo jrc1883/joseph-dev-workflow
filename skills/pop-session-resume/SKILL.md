@@ -1,5 +1,5 @@
 ---
-name: popkit:session-resume
+name: session-resume
 description: "Use at start of new session to restore context from STATUS.json - loads previous state, displays session type, shows what to continue working on"
 ---
 

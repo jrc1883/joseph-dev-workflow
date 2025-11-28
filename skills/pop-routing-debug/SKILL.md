@@ -1,5 +1,5 @@
 ---
-name: popkit:routing-debug
+name: routing-debug
 description: "Use when agent routing seems wrong, unexpected agents are selected, or you need to understand why a specific agent was chosen - provides detailed routing analysis and debugging"
 ---
 

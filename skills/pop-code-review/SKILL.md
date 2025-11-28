@@ -1,5 +1,5 @@
 ---
-name: popkit:code-review
+name: code-review
 description: "Use when completing tasks, implementing major features, or before merging to verify work meets requirements - reviews implementation against plan or requirements with confidence-based issue filtering (80+ threshold)"
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: popkit:setup-precommit
+name: setup-precommit
 description: "Use when setting up code quality automation for a project - configures pre-commit hooks and quality gates including linting, type checking, tests, and commit message validation"
 ---
 

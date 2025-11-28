@@ -1,5 +1,5 @@
 ---
-name: popkit:session-capture
+name: session-capture
 description: "Use at end of work session to save current state to STATUS.json - captures git context, in-progress tasks, service status, focus area, and next actions for seamless continuation"
 ---
 
