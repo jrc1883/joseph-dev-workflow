@@ -1,16 +1,15 @@
 ---
-name: pop:clean-gone
 description: Remove local branches whose remote tracking branches are gone (after PR merge)
 ---
 
-# /clean-gone - Clean Merged Branches
+# /popkit:clean-gone - Clean Merged Branches
 
 Remove stale local branches after PRs are merged.
 
 ## Usage
 
 ```
-/clean-gone [--dry-run]
+/popkit:clean-gone [--dry-run]
 ```
 
 ## Process
@@ -67,7 +66,7 @@ Current branches: main, develop
 ## Options
 
 ```
-/clean-gone              # Interactive cleanup
-/clean-gone --dry-run    # Preview only, no deletion
-/clean-gone --force      # Delete unmerged branches too (asks confirmation)
+/popkit:clean-gone              # Interactive cleanup
+/popkit:clean-gone --dry-run    # Preview only, no deletion
+/popkit:clean-gone --force      # Delete unmerged branches too (asks confirmation)
 ```

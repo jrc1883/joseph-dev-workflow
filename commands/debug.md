@@ -1,24 +1,23 @@
 ---
-name: pop:debug
 description: Systematic debugging with root cause analysis - 4-phase framework
 ---
 
-# /pop:debug - Systematic Debugging
+# /popkit:debug - Systematic Debugging
 
 Systematic approach to finding and fixing bugs with root cause analysis.
 
 ## Usage
 
 ```
-/pop:debug [issue-description]
-/pop:debug                         # Describe issue interactively
-/pop:debug "login fails on mobile"
-/pop:debug --test failing-test.ts  # Debug specific test
+/popkit:debug [issue-description]
+/popkit:debug                         # Describe issue interactively
+/popkit:debug "login fails on mobile"
+/popkit:debug --test failing-test.ts  # Debug specific test
 ```
 
 ## Process
 
-Invokes the **pop:systematic-debugging** skill:
+Invokes the **popkit:systematic-debugging** skill:
 
 ### Phase 1: Root Cause Investigation
 
@@ -83,14 +82,14 @@ The skill will stop and return to Phase 1 if:
 ## Options
 
 ```
-/pop:debug --verbose               # Show all investigation steps
-/pop:debug --skip-phase-1          # If already investigated (rare)
+/popkit:debug --verbose               # Show all investigation steps
+/popkit:debug --skip-phase-1          # If already investigated (rare)
 ```
 
 ## Example Session
 
 ```
-/pop:debug "Users getting logged out randomly"
+/popkit:debug "Users getting logged out randomly"
 
 Phase 1: Investigation
 - Error: "Token expired" in console
@@ -115,6 +114,6 @@ Verify: Test passes, manual test confirms
 ## Integration
 
 Uses skills:
-- **pop:root-cause-tracing** - When errors are deep in stack
-- **pop:defense-in-depth** - Adding validation layers after fix
-- **pop:test-driven-development** - Creating regression test
+- **popkit:root-cause-tracing** - When errors are deep in stack
+- **popkit:defense-in-depth** - Adding validation layers after fix
+- **popkit:test-driven-development** - Creating regression test

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**popkit** is a Claude Code plugin providing AI-powered development workflows through skills, agents, commands, and hooks. All commands use the `pop:` prefix (e.g., `/pop:commit`, `/pop:review`). It implements a two-tier architecture:
+**popkit** is a Claude Code plugin providing AI-powered development workflows through skills, agents, commands, and hooks. All commands use the `popkit:` prefix (e.g., `/popkit:commit`, `/popkit:review`). It implements a two-tier architecture:
 
 - **Tier 1 (this repo)**: Universal, project-agnostic tools that work anywhere
 - **Tier 2 (generated)**: Project-specific MCP servers, skills, and agents created via `/generate-mcp` and `/generate-skills`
@@ -40,7 +40,7 @@ This is a **configuration-only plugin** - no build or lint commands exist. All c
 - TypeScript templates (mcp-server)
 - JSON test definitions (tests/)
 
-**Self-testing available:** Run `/pop:plugin-test` to validate plugin integrity.
+**Self-testing available:** Run `/popkit:plugin-test` to validate plugin integrity.
 
 ## Key Architectural Patterns
 
@@ -60,29 +60,40 @@ Code review uses 80+ confidence threshold to filter issues:
 
 ### 7-Phase Feature Development
 
-The `/pop:feature-dev` command and feature-workflow agents follow: Discovery → Exploration (code-explorer) → Questions → Architecture (code-architect) → Implementation → Review (code-reviewer) → Summary
+The `/popkit:feature-dev` command and feature-workflow agents follow: Discovery → Exploration (code-explorer) → Questions → Architecture (code-architect) → Implementation → Review (code-reviewer) → Summary
 
 ### Session Continuity
 
 Three skills manage state between sessions:
-- `pop:session-capture`: Saves state to STATUS.json
-- `pop:session-resume`: Restores context on startup
-- `pop:context-restore`: Loads previous session
+- `popkit:session-capture`: Saves state to STATUS.json
+- `popkit:session-resume`: Restores context on startup
+- `popkit:context-restore`: Loads previous session
+
+## Installing popkit for Development
+
+To use popkit while developing popkit (chicken-and-egg), install it from GitHub:
+
+```
+/plugin marketplace add jrc1883/popkit
+/plugin install popkit@popkit-marketplace
+```
+
+Then **restart Claude Code** to load the plugin. After restart, `/popkit:` commands will be available.
 
 ## The Chicken-and-Egg Problem
 
 When developing this plugin:
 1. The skills/agents you're editing are the same ones you're using to edit
 2. Changes to hooks affect the current session behavior
-3. Use `/pop:worktree create` to test changes in isolation before merging
+3. Use `/popkit:worktree create` to test changes in isolation before merging
 
 ## Testing Changes
 
 Verify changes using the built-in test framework:
-1. Run `/pop:plugin-test` to validate all components
-2. Run `/pop:plugin-test hooks` to test hook JSON protocol
-3. Run `/pop:plugin-test routing` to verify agent selection
-4. For isolation: Create a worktree with `/pop:worktree create test-feature`
+1. Run `/popkit:plugin-test` to validate all components
+2. Run `/popkit:plugin-test hooks` to test hook JSON protocol
+3. Run `/popkit:plugin-test routing` to verify agent selection
+4. For isolation: Create a worktree with `/popkit:worktree create test-feature`
 
 ## MCP Server Template
 
@@ -113,9 +124,9 @@ npm run build
 
 ## New Features (v1.1.0)
 
-- **Auto-Documentation** (`/pop:auto-docs`): Generate and sync documentation
-- **Plugin Self-Testing** (`/pop:plugin-test`): Validate all plugin components
-- **Routing Debugger** (`/pop:routing-debug`): Debug agent selection logic
+- **Auto-Documentation** (`/popkit:auto-docs`): Generate and sync documentation
+- **Plugin Self-Testing** (`/popkit:plugin-test`): Validate all plugin components
+- **Routing Debugger** (`/popkit:routing-debug`): Debug agent selection logic
 - **SKILL.md Format**: Skills now use directory structure (`skills/name/SKILL.md`)
 - **JSON Hook Protocol**: All hooks use stdin/stdout JSON instead of argv
 - **MCP Configuration**: `.mcp.json` for Model Context Protocol integration

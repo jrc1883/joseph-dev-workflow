@@ -1,21 +1,20 @@
 ---
-name: pop:plugin-test
 description: "Run plugin self-tests to verify component integrity"
 ---
 
-# /plugin-test - Plugin Self-Testing
+# /popkit:plugin-test - Plugin Self-Testing
 
 Run comprehensive tests on plugin components to ensure everything works correctly.
 
 ## Usage
 
 ```
-/plugin-test              # Run all tests
-/plugin-test hooks        # Test hooks only
-/plugin-test agents       # Test agents only
-/plugin-test skills       # Test skills only
-/plugin-test routing      # Test agent routing
-/plugin-test structure    # Test file structure
+/popkit:plugin-test              # Run all tests
+/popkit:plugin-test hooks        # Test hooks only
+/popkit:plugin-test agents       # Test agents only
+/popkit:plugin-test skills       # Test skills only
+/popkit:plugin-test routing      # Test agent routing
+/popkit:plugin-test structure    # Test file structure
 ```
 
 ## Process

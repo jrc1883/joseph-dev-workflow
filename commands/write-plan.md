@@ -1,24 +1,23 @@
 ---
-name: pop:write-plan
 description: Create detailed implementation plan with bite-sized tasks for engineers with zero codebase context
 ---
 
-# /pop:write-plan - Implementation Planning
+# /popkit:write-plan - Implementation Planning
 
 Generate comprehensive implementation plans with exact file paths, code examples, and verification steps.
 
 ## Usage
 
 ```
-/pop:write-plan [feature-name]
-/pop:write-plan                    # Interactive
-/pop:write-plan user-auth          # From topic
-/pop:write-plan --from design.md   # From design doc
+/popkit:write-plan [feature-name]
+/popkit:write-plan                    # Interactive
+/popkit:write-plan user-auth          # From topic
+/popkit:write-plan --from design.md   # From design doc
 ```
 
 ## Process
 
-Invokes the **pop:writing-plans** skill:
+Invokes the **popkit:writing-plans** skill:
 
 1. Load design document or gather requirements
 2. Break into bite-sized tasks (2-5 minutes each)
@@ -32,7 +31,7 @@ Invokes the **pop:writing-plans** skill:
 ```markdown
 # [Feature] Implementation Plan
 
-> **For Claude:** Use pop:executing-plans skill to implement.
+> **For Claude:** Use popkit:executing-plans skill to implement.
 
 **Goal:** [One sentence]
 **Architecture:** [2-3 sentences]
@@ -88,4 +87,4 @@ Creates plan at `docs/plans/YYYY-MM-DD-<feature>.md`
 
 Then offers execution options:
 1. **Subagent-Driven** - Same session, fresh subagent per task
-2. **Parallel Session** - New session with /pop:execute-plan
+2. **Parallel Session** - New session with /popkit:execute-plan

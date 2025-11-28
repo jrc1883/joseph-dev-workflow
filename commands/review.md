@@ -1,20 +1,19 @@
 ---
-name: pop:review
 description: Code review with confidence-based filtering - only reports high-confidence issues (80+ threshold)
 ---
 
-# /review - Code Review
+# /popkit:review - Code Review
 
 Review code changes with confidence-based issue filtering.
 
 ## Usage
 
 ```
-/review                        # Review uncommitted changes
-/review --staged               # Review staged changes only
-/review --branch feature/auth  # Review branch vs main
-/review --pr 67                # Review PR changes
-/review --file src/auth.ts     # Review specific file
+/popkit:review                        # Review uncommitted changes
+/popkit:review --staged               # Review staged changes only
+/popkit:review --branch feature/auth  # Review branch vs main
+/popkit:review --pr 67                # Review PR changes
+/popkit:review --file src/auth.ts     # Review specific file
 ```
 
 ## Process
@@ -84,11 +83,11 @@ Minor DRY improvement recommended.
 ## Options
 
 ```
-/review --focus simplicity     # Focus on DRY/elegance
-/review --focus correctness    # Focus on bugs
-/review --focus conventions    # Focus on patterns
-/review --threshold 70         # Lower confidence threshold
-/review --verbose              # Include lower-confidence issues
+/popkit:review --focus simplicity     # Focus on DRY/elegance
+/popkit:review --focus correctness    # Focus on bugs
+/popkit:review --focus conventions    # Focus on patterns
+/popkit:review --threshold 70         # Lower confidence threshold
+/popkit:review --verbose              # Include lower-confidence issues
 ```
 
 ## Integration

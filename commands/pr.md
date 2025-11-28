@@ -1,16 +1,15 @@
 ---
-name: pop:pr
 description: GitHub pull request management - create, list, view, merge, review with templates
 ---
 
-# /pr - Pull Request Management
+# /popkit:pr - Pull Request Management
 
 Manage GitHub pull requests with structured templates.
 
 ## Usage
 
 ```
-/pr <subcommand> [options]
+/popkit:pr <subcommand> [options]
 ```
 
 ## Subcommands
@@ -20,10 +19,10 @@ Manage GitHub pull requests with structured templates.
 Create new pull request:
 
 ```
-/pr create                     # Interactive
-/pr create --title "Add auth"  # With title
-/pr create --draft             # As draft
-/pr create --base develop      # Target branch
+/popkit:pr create                     # Interactive
+/popkit:pr create --title "Add auth"  # With title
+/popkit:pr create --draft             # As draft
+/popkit:pr create --base develop      # Target branch
 ```
 
 **PR Template:**
@@ -55,11 +54,11 @@ Closes #<issue-number>
 List pull requests:
 
 ```
-/pr list                       # Open PRs
-/pr list --state all           # All PRs
-/pr list --author @me          # My PRs
-/pr list --review-requested    # Needs my review
-/pr list --draft               # Draft PRs only
+/popkit:pr list                       # Open PRs
+/popkit:pr list --state all           # All PRs
+/popkit:pr list --author @me          # My PRs
+/popkit:pr list --review-requested    # Needs my review
+/popkit:pr list --draft               # Draft PRs only
 ```
 
 Output:
@@ -76,10 +75,10 @@ Open PRs (5):
 View PR details:
 
 ```
-/pr view 67
-/pr view 67 --comments
-/pr view 67 --files
-/pr view 67 --checks
+/popkit:pr view 67
+/popkit:pr view 67 --comments
+/popkit:pr view 67 --files
+/popkit:pr view 67 --checks
 ```
 
 Output:
@@ -109,10 +108,10 @@ Files changed (5):
 Merge pull request:
 
 ```
-/pr merge 67                   # Default merge
-/pr merge 67 --squash          # Squash and merge
-/pr merge 67 --rebase          # Rebase and merge
-/pr merge 67 --delete-branch   # Delete branch after
+/popkit:pr merge 67                   # Default merge
+/popkit:pr merge 67 --squash          # Squash and merge
+/popkit:pr merge 67 --rebase          # Rebase and merge
+/popkit:pr merge 67 --delete-branch   # Delete branch after
 ```
 
 **Pre-merge checks:**
@@ -126,9 +125,9 @@ Merge pull request:
 Add PR review:
 
 ```
-/pr review 67 --approve
-/pr review 67 --request-changes --comment "Please fix X"
-/pr review 67 --comment "Looks good with minor suggestions"
+/popkit:pr review 67 --approve
+/popkit:pr review 67 --request-changes --comment "Please fix X"
+/popkit:pr review 67 --comment "Looks good with minor suggestions"
 ```
 
 ### checkout
@@ -136,7 +135,7 @@ Add PR review:
 Check out PR locally:
 
 ```
-/pr checkout 67
+/popkit:pr checkout 67
 ```
 
 ### diff
@@ -144,8 +143,8 @@ Check out PR locally:
 View PR diff:
 
 ```
-/pr diff 67
-/pr diff 67 --file src/auth.ts
+/popkit:pr diff 67
+/popkit:pr diff 67 --file src/auth.ts
 ```
 
 ### ready
@@ -153,7 +152,7 @@ View PR diff:
 Mark PR as ready for review (from draft):
 
 ```
-/pr ready 67
+/popkit:pr ready 67
 ```
 
 ### update
@@ -161,7 +160,7 @@ Mark PR as ready for review (from draft):
 Update PR branch with base:
 
 ```
-/pr update 67
+/popkit:pr update 67
 ```
 
 ## GitHub CLI Integration
@@ -180,14 +179,14 @@ gh pr checkout 67
 
 ```
 # Create PR from current branch
-/pr create --title "Add user authentication" --body "..."
+/popkit:pr create --title "Add user authentication" --body "..."
 
 # Check PR status
-/pr view 67 --checks
+/popkit:pr view 67 --checks
 
 # Squash merge with branch cleanup
-/pr merge 67 --squash --delete-branch
+/popkit:pr merge 67 --squash --delete-branch
 
 # Review and approve
-/pr review 67 --approve --comment "LGTM!"
+/popkit:pr review 67 --approve --comment "LGTM!"
 ```

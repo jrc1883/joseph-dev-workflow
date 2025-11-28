@@ -1,16 +1,15 @@
 ---
-name: pop:commit-push-pr
 description: Full workflow - stage, commit, push to branch, and create pull request
 ---
 
-# /pop:commit-push-pr - Full PR Workflow
+# /popkit:commit-push-pr - Full PR Workflow
 
 One command to go from changes to pull request.
 
 ## Usage
 
 ```
-/pop:commit-push-pr [branch-name]
+/popkit:commit-push-pr [branch-name]
 ```
 
 ## Process
@@ -40,7 +39,7 @@ git add -A
 
 ### Step 4: Generate Commit
 
-Use /pop:commit flow:
+Use /popkit:commit flow:
 - Analyze changes
 - Generate conventional commit message
 - Commit with attribution
@@ -85,10 +84,10 @@ Ready for review.
 ## Options
 
 ```
-/pop:commit-push-pr                    # Use current branch
-/pop:commit-push-pr feature/auth       # Create/use specific branch
-/pop:commit-push-pr --draft            # Create as draft PR
-/pop:commit-push-pr --no-verify        # Skip pre-commit hooks
+/popkit:commit-push-pr                    # Use current branch
+/popkit:commit-push-pr feature/auth       # Create/use specific branch
+/popkit:commit-push-pr --draft            # Create as draft PR
+/popkit:commit-push-pr --no-verify        # Skip pre-commit hooks
 ```
 
 ## Safety

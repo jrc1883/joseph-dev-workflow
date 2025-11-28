@@ -1,5 +1,5 @@
 ---
-name: pop:mcp-generator
+name: popkit:mcp-generator
 description: "Use when setting up project-specific development tools or after analyzing a codebase - generates custom MCP server with semantic search, project-aware tools, and health monitoring capabilities"
 ---
 

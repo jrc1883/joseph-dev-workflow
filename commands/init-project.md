@@ -1,17 +1,16 @@
 ---
-name: pop:init-project
 description: Initialize new project with .claude/ directory structure
 ---
 
-# /init-project - Project Initialization
+# /popkit:init-project - Project Initialization
 
 Scaffold a new project with complete Claude Code configuration.
 
 ## Usage
 
 ```
-/init-project                  # Initialize current directory
-/init-project my-app           # Initialize named project
+/popkit:init-project                  # Initialize current directory
+/popkit:init-project my-app           # Initialize named project
 ```
 
 ## Process
@@ -45,7 +44,7 @@ CLAUDE.md             # Project instructions
 ## Example
 
 ```
-/init-project
+/popkit:init-project
 
 Detecting project type...
 ✓ Node.js (Next.js 14) detected

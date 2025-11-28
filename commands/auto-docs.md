@@ -1,20 +1,19 @@
 ---
-name: pop:auto-docs
 description: "Automatically generate and update plugin documentation"
 ---
 
-# /auto-docs - Automatic Documentation Generator
+# /popkit:auto-docs - Automatic Documentation Generator
 
 Generate and synchronize plugin documentation by analyzing the codebase.
 
 ## Usage
 
 ```
-/auto-docs              # Full documentation generation
-/auto-docs check        # Check for documentation drift
-/auto-docs claude       # Update CLAUDE.md only
-/auto-docs readme       # Update README.md only
-/auto-docs components   # Generate component reference
+/popkit:auto-docs              # Full documentation generation
+/popkit:auto-docs check        # Check for documentation drift
+/popkit:auto-docs claude       # Update CLAUDE.md only
+/popkit:auto-docs readme       # Update README.md only
+/popkit:auto-docs components   # Generate component reference
 ```
 
 ## Process
@@ -49,7 +48,7 @@ Generate and synchronize plugin documentation by analyzing the codebase.
 ## Example
 
 ```
-> /auto-docs
+> /popkit:auto-docs
 
 Scanning plugin structure...
 - Agents: 29 (11 tier-1, 15 tier-2, 3 feature-workflow)

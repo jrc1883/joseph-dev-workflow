@@ -1,16 +1,15 @@
 ---
-name: pop:release
 description: GitHub release management - create releases, generate changelogs, tag versions
 ---
 
-# /release - Release Management
+# /popkit:release - Release Management
 
 Create and manage GitHub releases with auto-generated changelogs.
 
 ## Usage
 
 ```
-/release <subcommand> [options]
+/popkit:release <subcommand> [options]
 ```
 
 ## Subcommands
@@ -20,10 +19,10 @@ Create and manage GitHub releases with auto-generated changelogs.
 Create new release:
 
 ```
-/release create <version>
-/release create v1.2.0
-/release create v1.2.0 --draft
-/release create v1.2.0 --prerelease
+/popkit:release create <version>
+/popkit:release create v1.2.0
+/popkit:release create v1.2.0 --draft
+/popkit:release create v1.2.0 --prerelease
 ```
 
 Process:
@@ -59,9 +58,9 @@ https://github.com/owner/repo/compare/v1.1.0...v1.2.0
 List releases:
 
 ```
-/release list                  # All releases
-/release list --limit 5        # Recent 5
-/release list --draft          # Include drafts
+/popkit:release list                  # All releases
+/popkit:release list --limit 5        # Recent 5
+/popkit:release list --draft          # Include drafts
 ```
 
 Output:
@@ -78,7 +77,7 @@ v0.9.0-beta - 2 months ago (prerelease)
 View release details:
 
 ```
-/release view v1.2.0
+/popkit:release view v1.2.0
 ```
 
 Output:
@@ -101,9 +100,9 @@ Notes:
 Edit release:
 
 ```
-/release edit v1.2.0 --notes "Updated notes"
-/release edit v1.2.0 --draft false
-/release edit v1.2.0 --prerelease true
+/popkit:release edit v1.2.0 --notes "Updated notes"
+/popkit:release edit v1.2.0 --draft false
+/popkit:release edit v1.2.0 --prerelease true
 ```
 
 ### delete
@@ -111,8 +110,8 @@ Edit release:
 Delete release:
 
 ```
-/release delete v1.2.0
-/release delete v1.2.0 --tag  # Also delete tag
+/popkit:release delete v1.2.0
+/popkit:release delete v1.2.0 --tag  # Also delete tag
 ```
 
 ### changelog
@@ -120,9 +119,9 @@ Delete release:
 Generate changelog without creating release:
 
 ```
-/release changelog             # Since last release
-/release changelog v1.1.0      # Since specific version
-/release changelog --format md # Markdown output
+/popkit:release changelog             # Since last release
+/popkit:release changelog v1.1.0      # Since specific version
+/popkit:release changelog --format md # Markdown output
 ```
 
 ## Version Detection
@@ -161,14 +160,14 @@ gh release delete v1.2.0
 
 ```
 # Create release with auto-generated notes
-/release create v1.2.0
+/popkit:release create v1.2.0
 
 # Create draft release for review
-/release create v1.3.0 --draft
+/popkit:release create v1.3.0 --draft
 
 # View what would be in changelog
-/release changelog
+/popkit:release changelog
 
 # Edit release notes
-/release edit v1.2.0 --notes "$(cat CHANGELOG.md)"
+/popkit:release edit v1.2.0 --notes "$(cat CHANGELOG.md)"
 ```

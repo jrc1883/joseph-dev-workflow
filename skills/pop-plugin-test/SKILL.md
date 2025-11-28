@@ -1,5 +1,5 @@
 ---
-name: pop:plugin-test
+name: popkit:plugin-test
 description: "Use when verifying plugin integrity, testing hooks, or validating agent routing - runs comprehensive self-tests to ensure all plugin components function correctly"
 ---
 

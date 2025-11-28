@@ -1,16 +1,15 @@
 ---
-name: pop:commit
 description: Auto-generate commit message matching repository style with conventional commits
 ---
 
-# /commit - Smart Commit
+# /popkit:commit - Smart Commit
 
 Generate commit message from staged changes, following repository conventions.
 
 ## Usage
 
 ```
-/commit [message]
+/popkit:commit [message]
 ```
 
 - Without message: Auto-generate from diff
@@ -62,13 +61,13 @@ EOF
 
 **Auto-generated:**
 ```
-/commit
+/popkit:commit
 → Analyzes diff, generates: "feat(auth): add password reset flow"
 ```
 
 **With hint:**
 ```
-/commit fixed the login bug
+/popkit:commit fixed the login bug
 → "fix(auth): resolve login validation issue"
 ```
 

@@ -1,5 +1,5 @@
 ---
-name: pop:project-init
+name: popkit:project-init
 description: "Use when starting a new project or setting up Claude Code integration - initializes .claude/ directory structure including agents, skills, commands, hooks, and project documentation templates"
 ---
 

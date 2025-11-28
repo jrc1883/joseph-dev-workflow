@@ -1,16 +1,15 @@
 ---
-name: pop:run
 description: GitHub Actions workflow management - list, view, rerun workflows and check statuses
 ---
 
-# /run - GitHub Actions Management
+# /popkit:run - GitHub Actions Management
 
 Monitor and manage GitHub Actions workflows.
 
 ## Usage
 
 ```
-/run <subcommand> [options]
+/popkit:run <subcommand> [options]
 ```
 
 ## Subcommands
@@ -20,11 +19,11 @@ Monitor and manage GitHub Actions workflows.
 List workflow runs:
 
 ```
-/run list                      # Recent runs
-/run list --workflow ci.yml    # Specific workflow
-/run list --branch main        # By branch
-/run list --status failure     # Failed only
-/run list --limit 20           # More results
+/popkit:run list                      # Recent runs
+/popkit:run list --workflow ci.yml    # Specific workflow
+/popkit:run list --branch main        # By branch
+/popkit:run list --status failure     # Failed only
+/popkit:run list --limit 20           # More results
 ```
 
 Output:
@@ -42,9 +41,9 @@ Recent Workflow Runs:
 View run details:
 
 ```
-/run view 234
-/run view 234 --log
-/run view 234 --job build
+/popkit:run view 234
+/popkit:run view 234 --log
+/popkit:run view 234 --job build
 ```
 
 Output:
@@ -68,9 +67,9 @@ Jobs:
 Rerun workflow:
 
 ```
-/run rerun 233                 # Rerun all jobs
-/run rerun 233 --failed        # Rerun failed jobs only
-/run rerun 233 --job test      # Rerun specific job
+/popkit:run rerun 233                 # Rerun all jobs
+/popkit:run rerun 233 --failed        # Rerun failed jobs only
+/popkit:run rerun 233 --job test      # Rerun specific job
 ```
 
 ### watch
@@ -78,7 +77,7 @@ Rerun workflow:
 Watch running workflow:
 
 ```
-/run watch 235
+/popkit:run watch 235
 ```
 
 Live output:
@@ -98,7 +97,7 @@ Watching run #235...
 Cancel running workflow:
 
 ```
-/run cancel 235
+/popkit:run cancel 235
 ```
 
 ### download
@@ -106,8 +105,8 @@ Cancel running workflow:
 Download artifacts:
 
 ```
-/run download 234              # All artifacts
-/run download 234 --name dist  # Specific artifact
+/popkit:run download 234              # All artifacts
+/popkit:run download 234 --name dist  # Specific artifact
 ```
 
 ### logs
@@ -115,9 +114,9 @@ Download artifacts:
 View logs:
 
 ```
-/run logs 234                  # All logs
-/run logs 234 --job build      # Specific job
-/run logs 234 --failed         # Failed steps only
+/popkit:run logs 234                  # All logs
+/popkit:run logs 234 --job build      # Specific job
+/popkit:run logs 234 --failed         # Failed steps only
 ```
 
 ## GitHub CLI Integration
@@ -145,15 +144,15 @@ gh run download 234
 
 ```
 # Check why CI failed
-/run list --status failure
-/run view 233 --log
+/popkit:run list --status failure
+/popkit:run view 233 --log
 
 # Rerun failed tests
-/run rerun 233 --failed
+/popkit:run rerun 233 --failed
 
 # Watch current run
-/run watch
+/popkit:run watch
 
 # Download build artifacts
-/run download 234 --name build-output
+/popkit:run download 234 --name build-output
 ```

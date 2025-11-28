@@ -1,5 +1,5 @@
 ---
-name: pop:using-git-worktrees
+name: popkit:using-git-worktrees
 description: "Use when starting feature work that needs isolation from current workspace or before executing implementation plans - creates isolated git worktrees with smart directory selection and safety verification"
 ---
 
@@ -11,7 +11,7 @@ Git worktrees create isolated workspaces sharing the same repository, allowing w
 
 **Core principle:** Systematic directory selection + safety verification = reliable isolation.
 
-**Announce at start:** "I'm using the pop:using-git-worktrees skill to set up an isolated workspace."
+**Announce at start:** "I'm using the popkit:using-git-worktrees skill to set up an isolated workspace."
 
 ## Directory Selection Process
 
@@ -205,9 +205,9 @@ Ready to implement auth feature
 ## Integration
 
 **Called by:**
-- **pop:brainstorming** (Phase 4) - When design is approved and implementation follows
+- **popkit:brainstorming** (Phase 4) - When design is approved and implementation follows
 - Any skill needing isolated workspace
 
 **Pairs with:**
-- **pop:finishing-a-development-branch** - For cleanup after work complete
-- **pop:executing-plans** or **pop:subagent-driven-development** - Work happens in this worktree
+- **popkit:finishing-a-development-branch** - For cleanup after work complete
+- **popkit:executing-plans** or **popkit:subagent-driven-development** - Work happens in this worktree

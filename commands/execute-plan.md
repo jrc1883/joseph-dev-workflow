@@ -1,18 +1,17 @@
 ---
-name: pop:execute-plan
 description: Execute implementation plan in batches with review checkpoints
 ---
 
-# /execute-plan - Plan Execution
+# /popkit:execute-plan - Plan Execution
 
 Execute implementation plans in controlled batches with review checkpoints.
 
 ## Usage
 
 ```
-/execute-plan [plan-file]
-/execute-plan                              # Select from recent plans
-/execute-plan docs/plans/2025-01-15-auth.md
+/popkit:execute-plan [plan-file]
+/popkit:execute-plan                              # Select from recent plans
+/popkit:execute-plan docs/plans/2025-01-15-auth.md
 ```
 
 ## Process
@@ -84,9 +83,9 @@ After all tasks:
 ## Options
 
 ```
-/execute-plan --batch-size 5     # Larger batches
-/execute-plan --start-at 4       # Resume from task 4
-/execute-plan --dry-run          # Preview without executing
+/popkit:execute-plan --batch-size 5     # Larger batches
+/popkit:execute-plan --start-at 4       # Resume from task 4
+/popkit:execute-plan --dry-run          # Preview without executing
 ```
 
 ## Handling Blockers

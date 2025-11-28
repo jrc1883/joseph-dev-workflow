@@ -1,18 +1,17 @@
 ---
-name: pop:prd
 description: Create Product Requirements Document from brainstorming session
 ---
 
-# /prd - Product Requirements Document
+# /popkit:prd - Product Requirements Document
 
 Generate a PRD from a brainstorming session or feature description.
 
 ## Usage
 
 ```
-/prd [topic]
-/prd "task management app"
-/prd --from design.md          # Generate from design doc
+/popkit:prd [topic]
+/popkit:prd "task management app"
+/popkit:prd --from design.md          # Generate from design doc
 ```
 
 ## Process
@@ -20,7 +19,7 @@ Generate a PRD from a brainstorming session or feature description.
 1. Run brainstorming session (if not provided)
 2. Extract requirements
 3. Structure as PRD
-4. Save to `docs/prd/YYYY-MM-DD-<topic>.md`
+4. Save to `docs/popkit:prd/YYYY-MM-DD-<topic>.md`
 
 ## PRD Template
 
@@ -124,14 +123,14 @@ Generate a PRD from a brainstorming session or feature description.
 ## Example
 
 ```
-/prd task management app
+/popkit:prd task management app
 
 Starting brainstorming session...
 [Interactive session to gather requirements]
 
 Generating PRD...
 
-PRD created: docs/prd/2025-01-15-task-management.md
+PRD created: docs/popkit:prd/2025-01-15-task-management.md
 
 Summary:
 - 5 P0 requirements

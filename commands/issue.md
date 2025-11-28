@@ -1,16 +1,15 @@
 ---
-name: pop:issue
 description: GitHub issue management - create, list, view, close, comment with AI-executable format
 ---
 
-# /issue - GitHub Issue Management
+# /popkit:issue - GitHub Issue Management
 
 Manage GitHub issues with AI-optimized formatting.
 
 ## Usage
 
 ```
-/issue <subcommand> [options]
+/popkit:issue <subcommand> [options]
 ```
 
 ## Subcommands
@@ -20,10 +19,10 @@ Manage GitHub issues with AI-optimized formatting.
 Create new issue with AI-executable format:
 
 ```
-/issue create <title>
-/issue create "Add user authentication"
-/issue create --template bug
-/issue create --template feature
+/popkit:issue create <title>
+/popkit:issue create "Add user authentication"
+/popkit:issue create --template bug
+/popkit:issue create --template feature
 ```
 
 **AI-Executable Format:**
@@ -60,11 +59,11 @@ Templates:
 List repository issues:
 
 ```
-/issue list                    # Open issues
-/issue list --state all        # All issues
-/issue list --label bug        # Filtered by label
-/issue list --assignee @me     # Assigned to me
-/issue list --milestone v1.0   # By milestone
+/popkit:issue list                    # Open issues
+/popkit:issue list --state all        # All issues
+/popkit:issue list --label bug        # Filtered by label
+/popkit:issue list --assignee @me     # Assigned to me
+/popkit:issue list --milestone v1.0   # By milestone
 ```
 
 Output:
@@ -81,8 +80,8 @@ Open Issues (12):
 View issue details:
 
 ```
-/issue view 45
-/issue view 45 --comments
+/popkit:issue view 45
+/popkit:issue view 45 --comments
 ```
 
 Output:
@@ -105,10 +104,10 @@ Comments (3):
 Close issue:
 
 ```
-/issue close 45
-/issue close 45 --comment "Fixed in #PR"
-/issue close 45 --reason completed
-/issue close 45 --reason not_planned
+/popkit:issue close 45
+/popkit:issue close 45 --comment "Fixed in #PR"
+/popkit:issue close 45 --reason completed
+/popkit:issue close 45 --reason not_planned
 ```
 
 ### comment
@@ -116,8 +115,8 @@ Close issue:
 Add comment to issue:
 
 ```
-/issue comment 45 "Working on this"
-/issue comment 45 --file notes.md
+/popkit:issue comment 45 "Working on this"
+/popkit:issue comment 45 --file notes.md
 ```
 
 ### edit
@@ -125,10 +124,10 @@ Add comment to issue:
 Update issue:
 
 ```
-/issue edit 45 --title "New title"
-/issue edit 45 --label add:priority:high
-/issue edit 45 --assignee @username
-/issue edit 45 --milestone v1.0
+/popkit:issue edit 45 --title "New title"
+/popkit:issue edit 45 --label add:priority:high
+/popkit:issue edit 45 --assignee @username
+/popkit:issue edit 45 --milestone v1.0
 ```
 
 ### link
@@ -136,7 +135,7 @@ Update issue:
 Link issue to PR:
 
 ```
-/issue link 45 --pr 67
+/popkit:issue link 45 --pr 67
 ```
 
 ## Agent Routing
@@ -163,14 +162,14 @@ gh issue comment 45 --body "..."
 
 ```
 # Create bug report
-/issue create "Login button unresponsive" --template bug
+/popkit:issue create "Login button unresponsive" --template bug
 
 # List my assigned issues
-/issue list --assignee @me --state open
+/popkit:issue list --assignee @me --state open
 
 # Close with comment
-/issue close 45 --comment "Resolved in commit abc123"
+/popkit:issue close 45 --comment "Resolved in commit abc123"
 
 # Add work note
-/issue comment 45 "Started investigation, found potential race condition"
+/popkit:issue comment 45 "Started investigation, found potential race condition"
 ```

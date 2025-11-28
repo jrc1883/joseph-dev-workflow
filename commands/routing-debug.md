@@ -1,20 +1,19 @@
 ---
-name: pop:routing-debug
 description: "Debug and analyze agent routing decisions"
 ---
 
-# /routing-debug - Agent Routing Debugger
+# /popkit:routing-debug - Agent Routing Debugger
 
 Analyze and debug agent routing decisions to understand why specific agents are selected.
 
 ## Usage
 
 ```
-/routing-debug "your prompt"          # Analyze routing for a prompt
-/routing-debug explain <agent>        # Show agent's routing keywords
-/routing-debug keywords               # List all routing keywords
-/routing-debug trace "prompt"         # Show detailed routing trace
-/routing-debug compare "prompt"       # Compare all agent scores
+/popkit:routing-debug "your prompt"          # Analyze routing for a prompt
+/popkit:routing-debug explain <agent>        # Show agent's routing keywords
+/popkit:routing-debug keywords               # List all routing keywords
+/popkit:routing-debug trace "prompt"         # Show detailed routing trace
+/popkit:routing-debug compare "prompt"       # Compare all agent scores
 ```
 
 ## Process
@@ -42,7 +41,7 @@ Analyze and debug agent routing decisions to understand why specific agents are 
 
 ### Analyze Routing
 ```
-> /routing-debug "fix the login bug"
+> /popkit:routing-debug "fix the login bug"
 
 Selected Agent: bug-whisperer (0.85 confidence)
 
@@ -58,7 +57,7 @@ Top Competing Agents:
 
 ### Explain Agent
 ```
-> /routing-debug explain code-reviewer
+> /popkit:routing-debug explain code-reviewer
 
 code-reviewer Routing Rules
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -75,7 +74,7 @@ Example Prompts That Route Here:
 
 ### List Keywords
 ```
-> /routing-debug keywords
+> /popkit:routing-debug keywords
 
 All Routing Keywords
 ━━━━━━━━━━━━━━━━━━━━
@@ -90,7 +89,7 @@ test-writer-fixer: test, testing, unit, coverage
 
 ### Compare Scores
 ```
-> /routing-debug compare "optimize database performance"
+> /popkit:routing-debug compare "optimize database performance"
 
 Agent Score Comparison
 ━━━━━━━━━━━━━━━━━━━━━━

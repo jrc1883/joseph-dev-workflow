@@ -1,5 +1,5 @@
 ---
-name: pop:auto-docs
+name: popkit:auto-docs
 description: "Use when documentation is stale, incomplete, or needs synchronization with codebase changes - automatically generates and updates plugin documentation including CLAUDE.md, README.md, and component docs"
 ---
 

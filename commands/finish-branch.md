@@ -1,17 +1,16 @@
 ---
-name: pop:finish-branch
 description: Complete development work with 4-option flow - merge, PR, keep, or discard
 ---
 
-# /finish-branch - Complete Development
+# /popkit:finish-branch - Complete Development
 
 Guide completion of development work with structured options.
 
 ## Usage
 
 ```
-/finish-branch                 # Finish current branch
-/finish-branch feature/auth    # Finish specific branch
+/popkit:finish-branch                 # Finish current branch
+/popkit:finish-branch feature/auth    # Finish specific branch
 ```
 
 ## Process

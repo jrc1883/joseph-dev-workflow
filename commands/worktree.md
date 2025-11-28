@@ -1,16 +1,15 @@
 ---
-name: pop:worktree
 description: Manage git worktrees for parallel development - create, list, analyze, remove
 ---
 
-# /pop:worktree - Git Worktree Management
+# /popkit:worktree - Git Worktree Management
 
 Create and manage isolated workspaces for parallel development.
 
 ## Usage
 
 ```
-/pop:worktree <subcommand> [options]
+/popkit:worktree <subcommand> [options]
 ```
 
 ## Subcommands
@@ -20,9 +19,9 @@ Create and manage isolated workspaces for parallel development.
 Create new worktree with branch:
 
 ```
-/pop:worktree create <name>
-/pop:worktree create feature/auth
-/pop:worktree create fix-123 --from main
+/popkit:worktree create <name>
+/popkit:worktree create feature/auth
+/popkit:worktree create fix-123 --from main
 ```
 
 Process:
@@ -38,7 +37,7 @@ Process:
 List all worktrees:
 
 ```
-/pop:worktree list
+/popkit:worktree list
 ```
 
 Output:
@@ -54,7 +53,7 @@ Worktrees:
 Find opportunities for worktrees:
 
 ```
-/pop:worktree analyze
+/popkit:worktree analyze
 ```
 
 Checks for:
@@ -67,8 +66,8 @@ Checks for:
 Remove worktree and optionally branch:
 
 ```
-/pop:worktree remove <name>
-/pop:worktree remove feature/auth --keep-branch
+/popkit:worktree remove <name>
+/popkit:worktree remove feature/auth --keep-branch
 ```
 
 Process:
@@ -83,14 +82,14 @@ Process:
 Clean up stale worktrees:
 
 ```
-/pop:worktree prune
+/popkit:worktree prune
 ```
 
 Removes worktrees with deleted directories.
 
 ## Integration
 
-Uses **pop:using-git-worktrees** skill for:
+Uses **popkit:using-git-worktrees** skill for:
 - Directory selection logic
 - .gitignore verification
 - Project setup detection
@@ -100,14 +99,14 @@ Uses **pop:using-git-worktrees** skill for:
 
 ```
 # Start new feature
-/pop:worktree create feature/user-profiles
+/popkit:worktree create feature/user-profiles
 
 # See all workspaces
-/pop:worktree list
+/popkit:worktree list
 
 # Clean up after merge
-/pop:worktree remove feature/user-profiles
+/popkit:worktree remove feature/user-profiles
 
 # Find parallel work opportunities
-/pop:worktree analyze
+/popkit:worktree analyze
 ```

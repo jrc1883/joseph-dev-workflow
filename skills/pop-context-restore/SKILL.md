@@ -1,5 +1,5 @@
 ---
-name: pop:context-restore
+name: popkit:context-restore
 description: "Use when you need to fully restore working context from a previous session - loads STATUS.json, reads key files, rebuilds mental model of current work state"
 ---
 
