@@ -18,9 +18,9 @@ agents/                  29 agent definitions with tiered activation
   config.json            Agent routing, workflows, confidence thresholds
   tier-1-always-active/  11 core agents (code-reviewer, bug-whisperer, etc.)
   tier-2-on-demand/      16 specialized agents (including rapid-prototyper)
-  feature-workflow/      2 agents for 7-phase feature development
-skills/                  24 reusable skills (SKILL.md format in subdirectories)
-commands/                20 slash commands for workflows
+  feature-workflow/      3 agents for 7-phase feature development
+skills/                  25 reusable skills (SKILL.md format in subdirectories)
+commands/                22 slash commands for workflows
 hooks/                   10 Python hooks (JSON stdin/stdout protocol)
   hooks.json             Hook configuration and event mapping
 output-styles/           8 output format templates
@@ -64,10 +64,21 @@ The `/popkit:feature-dev` command and feature-workflow agents follow: Discovery 
 
 ### Session Continuity
 
-Three skills manage state between sessions:
-- `popkit:session-capture`: Saves state to STATUS.json
-- `popkit:session-resume`: Restores context on startup
-- `popkit:context-restore`: Loads previous session
+Three skills manage state between sessions (invoke via Skill tool):
+- `pop-session-capture`: Saves state to STATUS.json
+- `pop-session-resume`: Restores context on startup
+- `pop-context-restore`: Loads previous session
+
+### Morning Routine (Generic + Generator)
+
+Two-tier approach for daily health checks:
+- `/popkit:morning`: Generic check (git, tests, lint) - works on any project
+- `/popkit:generate-morning`: Creates project-specific `[prefix]:morning` with:
+  - Service health checks (detected ports, databases)
+  - Framework-specific validations
+  - Domain checks (API keys, external services)
+
+"Ready to Code" score (0-100) helps prioritize morning fixes.
 
 ## Installing popkit for Development
 
@@ -122,7 +133,13 @@ npm run build
 | `hooks/post-tool-use.py` | Cleanup and validation after tools |
 | `hooks/agent-orchestrator.py` | Agent sequencing and routing logic |
 
-## New Features (v1.1.0)
+## New Features (v1.2.0)
+
+- **Morning Health Check** (`/popkit:morning`): Universal morning routine with "Ready to Code" score
+- **Morning Generator** (`/popkit:generate-morning`): Create project-specific morning commands
+- **Tier 1 + Tier 2 Pattern**: Generic commands that generate project-specific versions
+
+### v1.1.0
 
 - **Auto-Documentation** (`/popkit:auto-docs`): Generate and sync documentation
 - **Plugin Self-Testing** (`/popkit:plugin-test`): Validate all plugin components
