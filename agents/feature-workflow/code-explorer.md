@@ -2,6 +2,7 @@
 name: code-explorer
 description: "Deeply analyzes existing codebase features by tracing execution paths, data flow, and dependencies. Use during exploration phase of feature development or when understanding unfamiliar code."
 tools: Read, Grep, Glob, LS
+output_style: agent-handoff
 ---
 
 # Code Explorer Agent

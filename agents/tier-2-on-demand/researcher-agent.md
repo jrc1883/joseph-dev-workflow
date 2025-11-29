@@ -2,6 +2,7 @@
 name: researcher-agent
 description: "Meta-researcher that analyzes codebases to identify beneficial agents and development opportunities. Use when discovering what agents would be most helpful for a project or expanding the agent ecosystem."
 tools: Read, Grep, Glob, WebFetch, WebSearch, Task, LS
+output_style: analysis-report
 ---
 
 # Researcher Agent - Agent Discovery & Analysis

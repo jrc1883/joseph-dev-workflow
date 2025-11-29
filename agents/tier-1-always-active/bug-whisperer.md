@@ -2,6 +2,7 @@
 name: bug-whisperer
 description: "Expert debugging specialist for complex issues. Use when facing hard-to-reproduce bugs, performance anomalies, or mysterious system behaviors that require deep investigation and systematic troubleshooting."
 tools: Read, Grep, Bash, Edit, MultiEdit, WebFetch
+output_style: debugging-report
 ---
 
 # Bug Whisperer Agent
