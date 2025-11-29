@@ -71,7 +71,14 @@
       "feature": ["feature-prioritizer", "user-story-writer"],
       "metrics": ["metrics-collector"],
       "logs": ["log-analyzer"],
-      "rollback": ["rollback-specialist"]
+      "rollback": ["rollback-specialist"],
+      "lint": ["code-reviewer", "refactoring-expert"],
+      "eslint": ["code-reviewer", "refactoring-expert"],
+      "linting": ["code-reviewer", "refactoring-expert"],
+      "prettier": ["code-reviewer"],
+      "format": ["code-reviewer"],
+      "style": ["code-reviewer"],
+      "cleanup": ["refactoring-expert", "dead-code-eliminator-agent"]
     },
 
     "filePatterns": {
@@ -82,7 +89,13 @@
       "*.md": ["documentation-maintainer"],
       "package.json": ["bundle-analyzer"],
       "Dockerfile": ["devops-automator-agent"],
-      ".env*": ["security-auditor"]
+      ".env*": ["security-auditor"],
+      ".eslintrc*": ["code-reviewer"],
+      "eslint.config.*": ["code-reviewer"],
+      ".prettierrc*": ["code-reviewer"],
+      "*.config.js": ["code-reviewer"],
+      "*.config.ts": ["code-reviewer"],
+      "tsconfig*.json": ["code-reviewer"]
     },
 
     "errorPatterns": {

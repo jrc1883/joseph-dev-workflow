@@ -59,6 +59,15 @@
       "enabled": true
     },
     {
+      "name": "output-validator",
+      "event": "SubagentStop",
+      "command": "python",
+      "args": ["hooks/output-validator.py"],
+      "description": "Validate agent outputs against their declared output_style schema",
+      "timeout": 5000,
+      "enabled": true
+    },
+    {
       "name": "notification",
       "event": "Notification",
       "command": "python",

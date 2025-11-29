@@ -49,6 +49,30 @@
       "prompt": "design the user interface for this feature",
       "expected_agent": "ui-designer",
       "min_confidence": 0.4
+    },
+    {
+      "name": "lint keywords route to code-reviewer",
+      "prompt": "fix the eslint errors and clean up the code",
+      "expected_agent": "code-reviewer",
+      "min_confidence": 0.4
+    },
+    {
+      "name": "eslint keywords route to code-reviewer",
+      "prompt": "configure eslint for this project",
+      "expected_agent": "code-reviewer",
+      "min_confidence": 0.4
+    },
+    {
+      "name": "cleanup keywords route to refactoring-expert",
+      "prompt": "cleanup this messy code and remove dead code",
+      "expected_agent": "refactoring-expert",
+      "min_confidence": 0.4
+    },
+    {
+      "name": "formatting keywords route to code-reviewer",
+      "prompt": "fix the prettier formatting issues",
+      "expected_agent": "code-reviewer",
+      "min_confidence": 0.4
     }
   ]
 }

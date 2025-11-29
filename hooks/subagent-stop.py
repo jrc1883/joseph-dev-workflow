@@ -1,19 +1,110 @@
 #!/usr/bin/env python3
 """
 Subagent Stop Hook
-Handles subagent completion with logging and optional TTS notifications.
+Handles subagent completion with logging, error tracking, and optional TTS notifications.
+Integrates with the popkit error tracking and lessons learned system.
 """
 
 import sys
 import json
-import shutil
+import os
 from pathlib import Path
+from datetime import datetime
+
+# Import error tracking utilities
+try:
+    from utils.github_issues import save_error_locally, save_lesson_locally
+except ImportError:
+    # Fallback if utils not available
+    def save_error_locally(error, status_file=None):
+        return {"status": "skip", "reason": "utils not available"}
+    def save_lesson_locally(lesson, status_file=None):
+        return {"status": "skip", "reason": "utils not available"}
+
+
+# Retry configuration
+MAX_RETRIES = 1
+RETRY_BACKOFF_SECONDS = 2
+
 
 def create_logs_directory():
     """Create logs directory if it doesn't exist."""
     logs_dir = Path("logs")
     logs_dir.mkdir(exist_ok=True)
     return logs_dir
+
+
+def check_validation_result(data: dict) -> dict | None:
+    """Check if there was a validation failure from output-validator hook.
+
+    Args:
+        data: Input data from subagent stop event
+
+    Returns:
+        Validation failure dict if found, None otherwise
+    """
+    validation = data.get("validation_result", {})
+    if validation.get("status") == "invalid":
+        return {
+            "type": "validation_failure",
+            "agent": validation.get("agent", "unknown"),
+            "output_style": validation.get("output_style", "unknown"),
+            "missing_fields": validation.get("missing_fields", []),
+            "confidence": validation.get("confidence", 0),
+            "timestamp": datetime.now().isoformat()
+        }
+    return None
+
+
+def track_error(error_data: dict) -> dict:
+    """Track error in local STATUS.json.
+
+    Args:
+        error_data: Error information to track
+
+    Returns:
+        Result of save operation
+    """
+    status_file = Path(".claude/STATUS.json")
+    return save_error_locally(error_data, status_file)
+
+
+def should_retry(data: dict, error_data: dict) -> bool:
+    """Determine if the subagent should be retried.
+
+    Args:
+        data: Original input data
+        error_data: Error information
+
+    Returns:
+        True if retry should be attempted
+    """
+    current_retries = data.get("retry_count", 0)
+    if current_retries >= MAX_RETRIES:
+        return False
+
+    # Only retry for validation failures (not for other errors)
+    if error_data.get("type") == "validation_failure":
+        return True
+
+    return False
+
+
+def create_retry_instruction(error_data: dict) -> str:
+    """Create instruction for retry attempt.
+
+    Args:
+        error_data: Error information
+
+    Returns:
+        Instruction string for the retry
+    """
+    missing = error_data.get("missing_fields", [])
+    output_style = error_data.get("output_style", "unknown")
+
+    return f"""Your previous output was missing required fields for the {output_style} format.
+Missing fields: {', '.join(missing)}
+Please regenerate your response including these required fields."""
 
 def get_tts_script_path():
     """Determine the best TTS script to use based on available API keys."""
@@ -63,34 +154,54 @@ def main():
         log_data = []
         if log_file.exists():
             try:
-                with open(log_file, 'r') as f:
+                with open(log_file, 'r', encoding='utf-8') as f:
                     log_data = json.load(f)
             except json.JSONDecodeError:
                 log_data = []
 
         log_data.append(data)
 
-        with open(log_file, 'w') as f:
+        with open(log_file, 'w', encoding='utf-8') as f:
             json.dump(log_data, f, indent=2)
+
+        # Check for validation failures and track errors
+        validation_error = check_validation_result(data)
+        retry_requested = False
+        retry_instruction = None
+
+        if validation_error:
+            # Track the error
+            track_result = track_error(validation_error)
+
+            # Check if we should retry
+            if should_retry(data, validation_error):
+                retry_requested = True
+                retry_instruction = create_retry_instruction(validation_error)
 
         # Check if chat saving is requested via data
         save_chat = data.get("save_chat", data.get("chat", False))
         if save_chat and 'transcript' in data:
             chat_file = logs_dir / "chat.json"
-            with open(chat_file, 'w') as f:
+            with open(chat_file, 'w', encoding='utf-8') as f:
                 json.dump(data['transcript'], f, indent=2)
 
         # Announce completion
         announce_subagent_completion()
 
         # Output JSON response to stdout
-        from datetime import datetime
         response = {
             "status": "success",
             "message": "Subagent stopped - logs saved",
             "timestamp": datetime.now().isoformat(),
-            "chat_saved": save_chat and 'transcript' in data
+            "chat_saved": save_chat and 'transcript' in data,
+            "validation_tracked": validation_error is not None,
+            "retry_requested": retry_requested
         }
+
+        if retry_requested and retry_instruction:
+            response["retry_instruction"] = retry_instruction
+            response["retry_count"] = data.get("retry_count", 0) + 1
+
         print(json.dumps(response))
 
     except json.JSONDecodeError as e:
