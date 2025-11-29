@@ -133,7 +133,16 @@ npm run build
 | `hooks/post-tool-use.py` | Cleanup and validation after tools |
 | `hooks/agent-orchestrator.py` | Agent sequencing and routing logic |
 
-## New Features (v1.2.0)
+## New Features (v1.3.0)
+
+- **Output Validation Layer**: JSON schemas for agent outputs with `output-validator.py` hook
+- **Sync Command** (`/popkit:sync`): Validate plugin integrity (Scan → Compare → Report → Apply)
+- **Error Tracking**: Lessons learned system with GitHub issue integration
+- **E2E Testing Framework**: 10 end-to-end test scenarios in `tests/e2e/`
+- **Validation Engine Skill** (`pop-validation-engine`): Reusable validation pattern
+- **Enhanced Routing**: Added lint/eslint/prettier/cleanup keywords and config file patterns
+
+### v1.2.0
 
 - **Morning Health Check** (`/popkit:morning`): Universal morning routine with "Ready to Code" score
 - **Morning Generator** (`/popkit:generate-morning`): Create project-specific morning commands
@@ -154,3 +163,57 @@ npm run build
 - Output styles define templates for PRs, issues, releases, reviews
 - Skills can invoke other skills; commands can invoke skills
 - Python hooks use `#!/usr/bin/env python3` and are chmod +x
+
+## Releasing New Versions
+
+When releasing a new version of popkit:
+
+### 1. Update Version Numbers
+
+Update version in these files (must match):
+- `.claude-plugin/plugin.json` - Main plugin version
+- `.claude-plugin/marketplace.json` - Marketplace version
+
+### 2. Update Changelog
+
+Add new version section to this file under "New Features":
+```markdown
+## New Features (vX.Y.Z)
+
+- **Feature Name**: Description
+- **Another Feature**: Description
+
+### vX.Y.Z-1
+...
+```
+
+### 3. Commit and Push
+
+```bash
+git add .claude-plugin/plugin.json .claude-plugin/marketplace.json CLAUDE.md
+git commit -m "chore: bump version to X.Y.Z for [feature summary]"
+git push
+```
+
+### 4. Update Installed Plugin
+
+After pushing, update the installed plugin:
+```
+/plugin update popkit@popkit-marketplace
+```
+
+Then **restart Claude Code** to load the new version.
+
+### 5. Verify Installation
+
+After restart, verify the update worked:
+- Check `/popkit:` commands are available
+- Run `/popkit:plugin-test` to validate components
+- Test any new features added
+
+### Version Numbering
+
+Follow semantic versioning:
+- **MAJOR** (X.0.0): Breaking changes to commands, agents, or hooks
+- **MINOR** (0.X.0): New features, commands, or agents (backward compatible)
+- **PATCH** (0.0.X): Bug fixes, documentation updates
