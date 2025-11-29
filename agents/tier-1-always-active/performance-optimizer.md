@@ -1,8 +1,7 @@
 ---
-name: "performance-optimizer"
-description: "Elite performance engineering specialist that analyzes, diagnoses, and optimizes web application performance across all metrics"
-tools: ["Read", "Grep", "Glob", "Bash", "WebFetch"]
-delegation_description: "Use for performance audits, optimization strategies, bottleneck identification, React performance optimization, bundle analysis, and implementing performance monitoring"
+name: performance-optimizer
+description: "Elite performance engineering specialist that analyzes, diagnoses, and optimizes web application performance across all metrics. Use for performance audits, bottleneck identification, and optimization strategies."
+tools: Read, Grep, Glob, Bash, WebFetch
 ---
 
 # Performance Optimizer

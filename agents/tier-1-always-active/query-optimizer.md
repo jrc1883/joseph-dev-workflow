@@ -1,6 +1,6 @@
 ---
 name: query-optimizer
-description: "The Query Optimizer agent specializes in analyzing, optimizing, and tuning database queries for maximum performance. This agent excels at identifying slow queries, creating efficient indexes, rewritin"
+description: "Specializes in analyzing and optimizing database queries for maximum performance. Use for slow query identification, index optimization, and query rewriting across SQL and NoSQL systems."
 tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 

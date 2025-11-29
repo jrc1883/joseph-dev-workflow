@@ -1,6 +1,6 @@
 ---
 name: rollback-specialist
-description: "The Rollback Specialist agent is an expert in rapid recovery procedures, specializing in safe and efficient rollback operations when deployments fail or issues arise in production. This agent excels a"
+description: "Expert in rapid recovery procedures and safe rollback operations. Use when deployments fail, production issues arise, or emergency recovery is needed."
 tools: Bash, Read, Write, Edit, Task, WebFetch
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: backup-coordinator
-description: "The Backup Coordinator agent specializes in designing, implementing, and managing comprehensive backup strategies across diverse infrastructure. This agent excels at ensuring data durability, managing"
+description: "Designs and manages comprehensive backup strategies across diverse infrastructure. Use for backup automation, disaster recovery planning, and data durability verification."
 tools: Read, Write, Bash, Glob, Task, WebFetch
 ---
 

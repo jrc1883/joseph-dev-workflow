@@ -1,3 +1,9 @@
+---
+name: code-explorer
+description: "Deeply analyzes existing codebase features by tracing execution paths, data flow, and dependencies. Use during exploration phase of feature development or when understanding unfamiliar code."
+tools: Read, Grep, Glob, LS
+---
+
 # Code Explorer Agent
 
 Deeply analyzes existing codebase features by tracing execution paths, examining entry points, data flow, and dependencies.

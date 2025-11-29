@@ -1,6 +1,6 @@
 ---
 name: log-analyzer
-description: "The Log Analyzer agent specializes in parsing, analyzing, and extracting insights from application logs across distributed systems. This agent excels at pattern detection, anomaly identification, erro"
+description: "Parses and analyzes application logs across distributed systems. Use for pattern detection, anomaly identification, error correlation, and log-based debugging."
 tools: Read, Grep, Glob, Bash, Write, WebFetch
 ---
 

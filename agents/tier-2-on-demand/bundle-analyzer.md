@@ -1,6 +1,6 @@
 ---
 name: bundle-analyzer
-description: "The Bundle Analyzer agent specializes in analyzing, optimizing, and reducing JavaScript bundle sizes for web applications. This agent excels at identifying bloated dependencies, implementing code spli"
+description: "Analyzes and optimizes JavaScript bundle sizes for web applications. Use for identifying bloated dependencies, implementing code splitting, and reducing bundle size."
 tools: Read, Write, Edit, MultiEdit, Bash, Grep, Glob
 ---
 

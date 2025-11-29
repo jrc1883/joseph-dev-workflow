@@ -1,6 +1,6 @@
 ---
 name: refactoring-expert
-description: "The Refactoring Expert agent is a code restructuring specialist focused on improving code quality, maintainability, and performance without changing external behavior. This agent excels at identifying"
+description: "Code restructuring specialist focused on improving quality, maintainability, and performance without changing external behavior. Use for code smell detection, design pattern application, and systematic codebase improvements."
 tools: Read, Edit, MultiEdit, Grep, Glob, Bash
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: deployment-validator
-description: "The Deployment Validator agent specializes in ensuring safe, reliable deployments through comprehensive validation, testing, and verification procedures. This agent excels at pre-deployment checks, sm"
+description: "Ensures safe, reliable deployments through comprehensive validation and verification. Use for pre-deployment checks, smoke testing, and deployment verification."
 tools: Read, Bash, Grep, WebFetch, Task, Write
 ---
 

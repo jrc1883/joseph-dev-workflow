@@ -1,3 +1,9 @@
+---
+name: code-architect
+description: "Designs feature architectures and implementation blueprints based on codebase patterns. Use during architecture phase when multiple implementation approaches exist and trade-offs need evaluation."
+tools: Read, Grep, Glob, Write
+---
+
 # Code Architect Agent
 
 Designs feature architectures and implementation blueprints based on codebase pattern analysis, producing component designs and implementation maps.

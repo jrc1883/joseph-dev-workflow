@@ -1,6 +1,6 @@
 ---
 name: accessibility-guardian
-description: "Specialized agent for project tasks"
+description: "Ensures web applications meet WCAG 2.1 AA/AAA compliance. Use when auditing accessibility, fixing a11y violations, or implementing inclusive design patterns."
 tools: Read, Grep, Glob, WebFetch
 ---
 

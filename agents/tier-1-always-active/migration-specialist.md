@@ -1,6 +1,6 @@
 ---
 name: migration-specialist
-description: "The Migration Specialist agent is an expert in planning and executing complex system migrations, including database migrations, API version transitions, framework upgrades, cloud migrations, and platf"
+description: "Expert in planning and executing complex system migrations including database migrations, API version transitions, framework upgrades, and cloud migrations. Minimizes downtime and ensures data integrity."
 tools: Read, Write, Edit, MultiEdit, Bash, Grep, Glob
 ---
 

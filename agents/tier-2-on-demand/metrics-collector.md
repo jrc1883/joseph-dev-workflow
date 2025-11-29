@@ -1,6 +1,6 @@
 ---
 name: metrics-collector
-description: "The Metrics Collector agent specializes in comprehensive telemetry gathering, metrics aggregation, and observability implementation across distributed systems. This agent excels at designing metrics s"
+description: "Specializes in telemetry gathering, metrics aggregation, and observability implementation. Use for designing metrics systems, implementing monitoring, and creating dashboards."
 tools: Read, Write, Bash, Grep, WebFetch, Edit
 ---
 
