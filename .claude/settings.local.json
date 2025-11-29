@@ -13,7 +13,18 @@
       "Bash(done)",
       "WebFetch(domain:www.anthropic.com)",
       "Bash(dir:*)",
-      "Bash(git remote set-url:*)"
+      "Bash(git remote set-url:*)",
+      "Bash(git push:*)",
+      "Bash(gh:*)",
+      "Bash(claude plugins list:*)",
+      "Bash(where:*)",
+      "Bash(cmd /c \"claude plugins list\")",
+      "Bash(findstr:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(powershell -Command:*)",
+      "Bash(claude --version:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(python -m json.tool:*)"
     ],
     "deny": [],
     "ask": []
